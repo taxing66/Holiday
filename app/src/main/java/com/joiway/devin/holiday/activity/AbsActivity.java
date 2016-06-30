@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.joiway.devin.holiday.R;
+import com.joiway.devin.holiday.tools.SharedPreferencesManager;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
@@ -24,10 +25,13 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
 public  class AbsActivity extends AppCompatActivity {
     protected  RelativeLayout.LayoutParams layoutParams;
     private RelativeLayout rlTitleBar;
+    protected SharedPreferencesManager mSharedPreferencesManager;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mSharedPreferencesManager = SharedPreferencesManager.getInstance(this);
         int top=0;
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
             SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);

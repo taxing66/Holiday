@@ -8,9 +8,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joiway.devin.holiday.activity.AbsActivity;
+import com.joiway.devin.holiday.tools.SharedPreferencesManager;
 
 public class MainActivity extends AbsActivity {
-
     private TextView tvTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,5 +20,6 @@ public class MainActivity extends AbsActivity {
         initTitleBar();
          tvTitle = (TextView) findViewById(R.id.tv_title);
          tvTitle.setText(R.string.happy_everyday);
+
     }
 }
