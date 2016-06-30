@@ -1,0 +1,45 @@
+1/  immersive
+
+
+  n. 沉浸式；沉浸感；增加沉浸感
+
+  网络释义:
+  Immersive - 身临其境; 沉浸式; 沉浸感
+  Immersive Applications - 沉浸型应用
+  immersive technology - 致力于融入科技; 融入科技
+2/  backup
+  ['bækʌp]  英['bækʌp]  美['bæk,ʌp]
+
+  n. 支持；后援；阻塞
+  adj. 支持的；候补的
+  vt. 做备份
+
+  网络释义:
+  BACKUP - 备份; 备份; 后备球员
+  Backup battery - 后备电池; 后备电池; 备用电池
+  backup file - 备份文件; 备用文件; 备份档
+3/  primary
+  ['praɪm(ə)rɪ]  英['praɪm(ə)rɪ]  美['praɪmɛri]
+
+  n. 原色；最主要者
+  adj. 主要的；初级的；基本的
+
+  网络释义:
+  Primary - 主星 (天文学); 主要的; 首要
+  Primary school - 小学; 希望小学; 小学
+  primary election - 初选; 预选选举; 预选
+
+
+Android 4.4中，沉浸式体验得到了再次强化，提供了一种“全屏模式”(Full-screen Immersive Mode)。全屏模式又分两种，一种叫后撤式 (Lean Back)，另一种叫做沉浸式(Immersive)。后撤式已经在之前的系统中被广泛使用了——当你在优酷APP中观看视频时，大部分时间手指是不会去碰屏幕的。这种情况下，虚拟键和状态栏都会自动隐藏，但当你触摸屏幕的时候，它们又会出现。而新加入的沉浸式则不太一样，在沉浸式全屏状态下，对屏幕的操作并不会唤出系统栏。想要唤出系统栏，你必须从屏幕的上/下边缘向屏幕内划入。沉浸式的全屏状态更适合游戏和阅读这样的应用。
+
+Android 4.4 一个很重要的改变就是透明系统栏.。新的系统栏是渐变透明的, 可以最大限度的允许屏幕显示更多内容, 也可以让系统栏和 Action Bar 融为一体, 仅仅留下最低限度的背景保护以免通知通知栏内容和 Action Bar 文字/图标难以识别。谷歌把这种效果称之为：Translucent Bar。
+Translucent Bar 是 Android 对 Edge to Edge 尝试中的一个, 也是最容易被用户注意到的. 它的初始目的就是要最大化可视面积和淡化系统界面的存在感。
+
+  <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+
+        第个应用设置：allowBackup
