@@ -40,6 +40,12 @@ public class SharedPreferencesManager {
     private  SharedPreferences.Editor mEditor;
     private Context mContext;
 
+    /**
+     * 构造器私有化
+     */
+    private SharedPreferencesManager(){
+    }
+
     public SharedPreferencesManager(Context applicationContext) {
         this.mContext = applicationContext;
         this.mSharedPreferences = applicationContext.getSharedPreferences(SHARE_PREFERENCE_XML_FILE_NAME,Context.MODE_PRIVATE);

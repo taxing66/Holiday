@@ -1,14 +1,13 @@
-package com.joiway.devin.holiday;
+package com.joiway.devin.holiday.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.joiway.devin.holiday.activity.AbsActivity;
-import com.joiway.devin.holiday.tools.SharedPreferencesManager;
+import com.joiway.devin.holiday.BuildConfig;
+import com.joiway.devin.holiday.R;
+import com.joiway.devin.holiday.tools.LogManager;
 
 public class MainActivity extends AbsActivity {
     private TextView tvTitle;
@@ -20,6 +19,6 @@ public class MainActivity extends AbsActivity {
         initTitleBar();
          tvTitle = (TextView) findViewById(R.id.tv_title);
          tvTitle.setText(R.string.happy_everyday);
-
+          LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate","test_debug");
     }
 }

@@ -55,10 +55,6 @@ public class MeasureView extends View{
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        Paint paint = new Paint();
-        paint.setColor(Color.RED);
-        canvas.drawText("hello world",0,VIEW_SIZE_DIMENSION_DEFAULT,0,0,paint);
-        invalidate();
     }
 
     /***
