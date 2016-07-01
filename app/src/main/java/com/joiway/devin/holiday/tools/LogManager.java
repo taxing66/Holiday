@@ -43,7 +43,7 @@ public final class LogManager {
     public static  void logError(String tag ,String className,String methodName,String content){
         String tip = "debug log export："+"<className:"+className+"-methodName:"+methodName+">";
         if (isDebug){
-            Log.d(tag,tip+content);
+            Log.e(tag,tip+content);
         }
     }
     /**
@@ -54,7 +54,7 @@ public final class LogManager {
     public static  void logInfo(String tag ,String className,String methodName,String content){
         String tip = "debug log export："+"<className:"+className+"-methodName:"+methodName+">";
         if (isDebug){
-            Log.d(tag,tip+content);
+            Log.i(tag,tip+content);
         }
     }
     /**
@@ -65,7 +65,7 @@ public final class LogManager {
     public static  void logWarn(String tag ,String className,String methodName,String content){
         String tip = "debug log export："+"<className:"+className+"-methodName:"+methodName+">";
         if (isDebug){
-            Log.d(tag,tip+content);
+            Log.w(tag,tip+content);
         }
     }
 }
