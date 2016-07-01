@@ -9,4 +9,10 @@
         <item name="android:windowNoTitle">true</item>
     </style>
 
+    <style name="ResingBottomTheme" parent="@android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
 </resources>
