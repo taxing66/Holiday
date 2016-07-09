@@ -1,0 +1,37 @@
+1.disallow
+  [dɪsə'laʊ]  英[dɪsə'laʊ]  美[,dɪsə'laʊ]
+
+  vt. 驳回，不接受；不准许
+
+  网络释义:
+  Disallow - 不准许; 拒绝承认; 不接受
+  Disallow Foliage - 符号无植被区域
+  Disallow Spectators - 禁止观战
+2/  intercept
+  [,ɪntə'sept]  英[,ɪntə'sept]  美[,ɪntɚ'sɛpt]
+
+  n. 拦截；[数] 截距；截获的情报
+  vt. 拦截；截断；窃听
+
+  网络释义:
+  intercept - 截距; 拦截; 截击
+  intercept method - 截距法; 顶距差法; 高度差法
+  Intercept Interview - 拦截访问; 拦截调查
+3/  metrics
+  ['metrɪks]  英['metrɪks]  美['mɛtrɪks]
+
+  n. 度量；作诗法；韵律学
+
+  网络释义:
+  Metrics - 权值; 度量; 韵律学
+  Gathering Metrics - 搜集度量数据
+  quality metrics - 质量度量学; 质量测量指标; 质量衡量标准
+4  inflater
+ [in'fleitə]  英[in'fleitə]  美[in'fleitə]
+
+ n. 增压泵；充气者
+
+ 网络释义:
+ inflater - 增压泵
+ tyre inflater - 轮胎充气机
+ auto inflater for bicycle - 自行车自动充气机

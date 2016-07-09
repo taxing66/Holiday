@@ -1,0 +1,86 @@
+1/  argument
+  ['ɑːgjʊm(ə)nt]  英['ɑːgjʊm(ə)nt]  美['ɑrɡjumənt]
+
+  n. 论证；论据；争吵；内容提要
+
+  网络释义:
+  argument - 争论; 论点; 逻辑论证
+  argument - 与……争吵
+  Argument principle - 辐角原理; 辐角原理; 辩论原则
+2/  specifier
+  ['spesifaiə]  英['spesifaiə]  美['spesifaiə]
+
+  n. [计] 说明符；指示语；[计] 区分符
+
+  网络释义:
+  specifier - 说明符; 区分符; 指示语
+  element specifier - 元素说明符
+  position specifier - 位置指示
+3/  illegal
+  [ɪ'liːg(ə)l]  英[ɪ'liːg(ə)l]  美[ɪ'ligl]
+
+  n. 非法移民；间谍
+  adj. [法] 非法的；违法的；违反规则的
+
+  网络释义:
+  Illegal - 非法; 违法; 不合法的
+  illegal deal - 猫腻儿
+  Illegal Tender - 非法招标; 非法反击
+
+java.util.MissingFormatArgumentException: Format specifier '%d'
+java.util.IllegalFormatConversionException: d != java.lang.Double
+	 //格式化为decimal十进制
+		 System.out.println(String.format("the book's price: %1d,%2d",23,43));
+		 //限制小数点后面的位置
+		 System.out.println(String.format("the book's price: %1.2f,%2d",23.232,43));
+		 //限制字符串格式化长度
+		 System.out.println(String.format("the book's price: %1.2s,%2d",23.232,43));
+SimpleDateFormat 日期格式类：
+把各数字设置进去：
+        SimpleDateFormat myFmt4=new SimpleDateFormat(
+	                "一年中的第 D 天 一年中第w个星期 一月中第W个星期 在一天中k时 z时区+当前时间："+"Gy年M月d日ah时m分s秒S毫秒E");
+	                一年中的第 189 天 一年中第28个星期 一月中第2个星期 在一天中10时 CST时区+当前时间：公元2016年7月7日上午10时14分14秒935毫秒星期四
+	                --------------------------
+	                loadDataWithBaseURL(String baseUrl, String data,
+                                String mimeType, String encoding, String historyUrl) 加载文本式html
+              Html.fromHtml(getHtmlRule(mBonusRuleList, mHtmlRule)textView显示html文本；
+              Html.formHtml 处理文本间需要变色的文字
+               <string name="test_html"><![CDATA[<font color="#FE7418"><b>%1$d/%2$d</b></font>人签到&#160;&#160;<font color="#FE7418"><b>%3$d</b></font>人签到异常]]></string>
+                一些常用的html 标签：
+                <h1>...</h1>
+
+                标题字(最大)
+
+                <h6>...</h6>
+
+                标题字(最小)
+                <b>...</b>
+
+                粗体字
+
+                <strong>...</strong>
+
+                粗体字(强调)
+                <u>...</u>
+
+                底线
+                <font color=00ff00>...</font>
+
+                字体颜色
+
+                <font size=1>...</font>
+
+                最小字体
+                <br>
+
+                (换行)
+                <p>...</p>
+
+                水域(段落)
+
+                <center>...</center>
+
+                置中
+              -------------------
+              CDATA 指的是不由 XML 解析器进行解析的文本数据。
+
