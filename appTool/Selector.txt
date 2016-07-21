@@ -1,0 +1,36 @@
+1/  selector
+  [sɪ'lektə]  英[sɪ'lektə]  美[sə'lɛktɚ]
+
+  n. 选择器；挑选者
+
+  网络释义:
+  selector - 选择器; 选择符; 选择钮
+  selector switch - 选择开关; 选择器; 选择器开关
+  Universal Selector - 通配选择符; 通配选择器; 通用选择器
+2/Parcelable
+接口串行化
+ 实现可包装
+Selector 的一些状态：背景选择器
+<!-- 没有焦点时 -->
+  <item android:state_window_focused="false"
+  <!-- 非触摸模式下获得焦点并单击时的背景图片 -->
+    <item android:state_focused="true" android:state_pressed="true"
+    <!-- 触摸模式下单击时的背景图片 -->
+      <item android:state_focused="false" android:state_pressed="true"
+      <!--选中时的图片背景  -->
+        <item android:state_selected="true"
+        <!--获得焦点时的图片背景  -->
+          <item android:state_focused="true"
+          android:state_enabled是设置是否响应事件,指所有事件
+
+             ----------------------------------
+             1、transition drawable  渐变 视图使用
+             ImageButton button = (ImageButton) findViewById(R.id.button);
+             TransitionDrawable drawable = (TransitionDrawable) button.getDrawable();
+             drawable.startTransition(500);
+             2、State List  类似 state press, long_press focus and so on drawable or color change
+             3、layer list  层图绘制
+             4、InsetDrawable 表示一个drawable嵌入到另外一个drawable内部，并且在内部留一些间距，这一点很像drawable的padding属性，区别在于 padding表示drawable的内容与drawable本身的边距，insetDrawable表示两个drawable和容器之间的边距。当控件需要的背景比实际的边框小的时候比较适合使用InsetDrawable。
+             5/Clip Drawable
+               An XML file that defines a drawable that clips another Drawable based on this Drawable's current level value. Creates a ClipDrawable.
+

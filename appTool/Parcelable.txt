@@ -1,0 +1,40 @@
+1/  serializable
+美: ['sɪriəlaizable[
+
+  adj. 可串行化的
+2/  parcel
+  ['pɑːs(ə)l]  英['pɑːs(ə)l]  美['pɑrsl]
+
+  n. 包裹，小包
+  n. (Parcel)人名；(英)帕斯尔
+  vt. 打包；捆扎
+
+  网络释义:
+  parcel - 包裹; 小包; 一包
+  parcel survey - 地块测量; 界址测量
+  postal parcel - 邮政包裹; 邮包; 经由邮局传送的包裹
+
+  网络释义:
+  Serializable - 序列化; 可序列化; 可串行化
+  Java Serializable - 序列化
+  Serializable Schedule - 可序列化排程; 可串行化调度; 可串行化调度
+
+Parcelable是一个接口、用来实现序列化。与此类似的还有一个接口Serializable，这是JavaSE本身支持的，而Parcelable是Android特有的。二者比较：
+
+1、Parcelable使用起来稍复杂点，而后者使用起来非常简单。下面例子中会看到。
+
+2、Parcelable效率比Serializable高，支持Intent数据传递，也支持进程间通信（IPC）。
+
+3、Parcelable使用时要用到一个Parcel，可以简单将其看为一个容器，序列化时将数据写入Parcel，反序列化时从中取出。
+
+4、在使用内存的时候，Parcelable比Serializable性能高，所以推荐使用Parcelable。Serializable在序列化的时候会产生大量的临时变量，从而引起频繁的GC。Parcelable不能使用在要将数据存储在磁盘上的情况，因为Parcelable在外界有变化的情况下不能很好的保证数据的持续性。尽管Serializable效率低点，但此时还是建议使用Serializable 。
+使用方式：
+one/重写内容描述方法
+describeContents()
+two/按照顺序写入数据到parcel，boolean use writeByte 1:0;
+writeToParcel(Parcel dest, int flags)
+three/必须实现此接口其方法，反序列化时使用
+ Parcelable.Creator<ImageDialogBuilderBean> CREATOR = new Parcelable.Creator<ImageDialogBuilderBean>(){
+ createFromParcel(Parcel source) 从Parcel容器中读取传递数据值，封装成Parcelable对象返回逻辑层。
+ newArray(int size)方法是供外部类反序列化本类数组使用。
+ }

@@ -5,19 +5,44 @@
     xmlns:custom="http://schemas.android.com/apk/com.joiway.devin.holiday"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_green_dark"
     tools:context=".activity.MainActivity">
     <include layout="@layout/view_title_bar" android:id="@+id/rl_title"/>
     <TextView
-        android:text="Hello World!"
+        android:text=""
         android:layout_width="match_parent"
         android:id="@+id/tv_content"
         android:layout_below="@id/rl_title"
-        custom:textColor="@color/white"
         android:gravity="center"
         android:layout_height="match_parent" />
-    <com.joiway.devin.holiday.view.MeasureView
+    <ImageView
         android:layout_width="wrap_content"
-        android:background="@color/colorPrimary"
+        android:id="@+id/iv_clip"
+        android:visibility="gone"
         android:layout_centerInParent="true"
+        android:background="@drawable/shape_oval"
         android:layout_height="wrap_content" />
+      <Button
+          android:layout_width="wrap_content"
+          android:background="@drawable/shape_oval"
+          android:layout_centerInParent="true"
+          android:id="@+id/btn_enter"
+          android:text="hello"
+          android:textColor="@android:color/white"
+          android:textSize="@dimen/activity_horizontal_margin"
+          android:layout_height="wrap_content" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:text="hello"
+        android:textSize="30dp"
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:background="@drawable/shape_layer_list"
+        android:layout_height="wrap_content" />
+    <!--<com.joiway.devin.holiday.view.MeasureView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_height="wrap_content" />-->
 </RelativeLayout>

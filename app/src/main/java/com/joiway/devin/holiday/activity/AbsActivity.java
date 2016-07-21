@@ -23,8 +23,6 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
 public  class AbsActivity extends AppCompatActivity {
-    protected  RelativeLayout.LayoutParams layoutParams;
-    private RelativeLayout rlTitleBar;
     protected SharedPreferencesManager mSharedPreferencesManager;
 
 
@@ -32,6 +30,11 @@ public  class AbsActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mSharedPreferencesManager = SharedPreferencesManager.getInstance(this);
+
+    }
+    protected void initTitleBar(){
+        RelativeLayout.LayoutParams layoutParams;
+        RelativeLayout rlTitleBar;
         int top=0;
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
             SystemBarTintManager systemBarTintManager = new SystemBarTintManager(this);
@@ -42,8 +45,6 @@ public  class AbsActivity extends AppCompatActivity {
         Log.d("devin","Build.VERSION.SDK_INT"+Build.VERSION.SDK_INT+"height:"+top);
         layoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         layoutParams.setMargins(0,top,0,0);
-    }
-    protected void initTitleBar(){
         rlTitleBar = (RelativeLayout) this.findViewById(R.id.rl_title);
         rlTitleBar.setLayoutParams(layoutParams);
     }
