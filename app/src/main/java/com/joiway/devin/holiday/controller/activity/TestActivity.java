@@ -1,4 +1,4 @@
-package com.joiway.devin.holiday.activity;
+package com.joiway.devin.holiday.controller.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

@@ -1,4 +1,4 @@
-package com.joiway.devin.holiday.Interface;
+package com.joiway.devin.holiday.controller.Interface;
 
 /**
  * Created by Administrator on 2016/8/5.

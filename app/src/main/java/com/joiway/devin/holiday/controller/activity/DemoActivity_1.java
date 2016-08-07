@@ -1,4 +1,4 @@
-package com.joiway.devin.holiday.activity;
+package com.joiway.devin.holiday.controller.activity;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -15,12 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joiway.devin.holiday.R;
-import com.joiway.devin.holiday.tools.LogManager;
+import com.joiway.devin.holiday.controller.tools.system.LogManager;
 import com.joiway.devin.holiday.view.HorizontalScrollViewEx;
 
 import java.util.ArrayList;
 
-import utils.MyUtils;
+import com.joiway.devin.holiday.controller.tools.system.MyUtils;
 
 public class DemoActivity_1 extends Activity {
     private static final String TAG = "DemoActivity_1";

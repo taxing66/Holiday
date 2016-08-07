@@ -1,9 +1,7 @@
 package com.joiway.devin.holiday.model;
 
-import android.util.Log;
-
-import com.joiway.devin.holiday.Interface.IGrow;
-import com.joiway.devin.holiday.tools.LogManager;
+import com.joiway.devin.holiday.controller.Interface.IGrow;
+import com.joiway.devin.holiday.controller.tools.system.LogManager;
 
 /**
  * Created by Administrator on 2016/8/5.

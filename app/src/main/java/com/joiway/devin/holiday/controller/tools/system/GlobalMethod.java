@@ -1,6 +1,6 @@
-package com.joiway.devin.holiday;
+package com.joiway.devin.holiday.controller.tools.system;
 
-import com.joiway.devin.holiday.tools.LogManager;
+import com.joiway.devin.holiday.controller.tools.system.LogManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;

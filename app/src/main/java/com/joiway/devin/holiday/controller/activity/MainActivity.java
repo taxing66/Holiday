@@ -1,30 +1,24 @@
-package com.joiway.devin.holiday.activity;
+package com.joiway.devin.holiday.controller.activity;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
-import android.animation.TimeAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
-import android.content.pm.ProviderInfo;
 import android.graphics.Color;
 import android.graphics.drawable.ClipDrawable;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.joiway.devin.holiday.BuildConfig;
-import com.joiway.devin.holiday.GlobalMethod;
 import com.joiway.devin.holiday.R;
+import com.joiway.devin.holiday.controller.tools.data.ReflectionUtils;
 import com.joiway.devin.holiday.model.Son;
-import com.joiway.devin.holiday.tools.LogManager;
+import com.joiway.devin.holiday.controller.tools.system.LogManager;
 import com.joiway.devin.holiday.view.CustomDrawable;
 
 public class MainActivity extends AbsActivity {
@@ -58,7 +52,7 @@ public class MainActivity extends AbsActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(this, "hello ", Toast.LENGTH_SHORT).show();
-         LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate",GlobalMethod.findMethod(Son.class,"grow",null)
+         LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate", ReflectionUtils.findMethod(Son.class,"grow",null)
          .getClass().toString());
         initTitleBar();
         mLevel = 0;

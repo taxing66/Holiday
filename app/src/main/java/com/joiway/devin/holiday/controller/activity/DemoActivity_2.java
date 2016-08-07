@@ -1,15 +1,15 @@
-package com.joiway.devin.holiday.activity;
+package com.joiway.devin.holiday.controller.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
-import com.joiway.devin.holiday.GlobalMethod;
+import com.joiway.devin.holiday.controller.tools.system.GlobalMethod;
 import com.joiway.devin.holiday.R;
 import com.joiway.devin.holiday.model.GrandParents;
 import com.joiway.devin.holiday.model.Son;
-import com.joiway.devin.holiday.tools.LogManager;
+import com.joiway.devin.holiday.controller.tools.system.LogManager;
 
 import java.lang.reflect.Field;
 

@@ -1,6 +1,6 @@
 package com.joiway.devin.holiday.model;
 
-import com.joiway.devin.holiday.tools.LogManager;
+import com.joiway.devin.holiday.controller.tools.system.LogManager;
 
 /**
  * Created by Administrator on 2016/8/5.

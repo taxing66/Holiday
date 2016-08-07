@@ -1,8 +1,7 @@
-package com.joiway.devin.holiday.activity;
+package com.joiway.devin.holiday.controller.activity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -10,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.joiway.devin.holiday.R;
-import com.joiway.devin.holiday.tools.SharedPreferencesManager;
+import com.joiway.devin.holiday.controller.tools.system.SharedPreferencesManager;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
 
 /**
