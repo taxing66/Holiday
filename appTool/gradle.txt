@@ -1,0 +1,183 @@
+1/  advanced
+  [æd'vɑːnst]  英[æd'vɑːnst]  美[əd'vænst]
+
+  adj. 先进的；高级的；晚期的；年老的
+  v. 前进；增加；上涨（advance的过去式和过去分词形式）
+
+  网络释义:
+  advanced - 高级; 先进; 高级设置
+  Advanced Materials - 先进材料; 先进材料; 高级材料
+  Advanced Placement - 大学先修课程; 大学先修课程; 大学预修课程
+2/  toolkit
+  ['tuːlkɪt]  英['tuːlkɪt]  美['tulkɪt]
+
+  n. 工具包，工具箱
+
+  网络释义:
+  Toolkit - 工具箱; 工具包; 工具钳
+  Translate Toolkit - Translate Toolkit; Translate Toolkit; 翻译工具
+  Globus Toolkit - Globus工具包; Globus工具包; 工具包
+3/  logic
+  ['lɒdʒɪk]  英['lɒdʒɪk]  美['lɑdʒɪk]
+
+  n. 逻辑；逻辑学；逻辑性
+  adj. 逻辑的
+
+  网络释义:
+  Logic - 逻辑; 逻辑; 逻辑学
+  Logic Pro - Logic Pro; Logic Pro; 로직 프로
+  combinational logic - 组合逻辑电路; 组合逻辑; 组合数元
+4/  plugin
+  [plʌgɪn]  英[plʌgɪn]  美[plʌgɪn]
+
+  n. 插件；相关插件
+  n. (Plugin)人名；(俄)普卢金
+
+  网络释义:
+  plugin - 插件; 插件; 插件目录
+  Use plugin - 使用插件; 请记得将
+  extensive plugin - 扩展插件
+5/  features
+  [ˈfiːtʃəz]  英[ˈfiːtʃəz]  美[fitʃɚz]
+
+  n. 产品特点，特征；容貌；嘴脸（feature的复数）
+  v. 是…的特色，使突出（feature的第三人称单数）
+
+  网络释义:
+  Features - 特点; 特性; 产品特点
+  Sunday features - 周日特刊; 星期日特刊; 周日特刊
+  Main features - 主要特点; 主要特征; 功能特点
+6/  domain
+  [də(ʊ)'meɪn]  英[də(ʊ)'meɪn]  美[do'men]
+
+  n. 领域；域名；产业；地产
+  n. (Domain)人名；(英、法)多曼
+
+  网络释义:
+  domain - 领域; 域; 域
+  public domain - 公共领域; 公有领域; 公有领域
+  time domain - 时域; 时间域; 时区域
+7/  groovy
+  ['gruːvɪ]  英['gruːvɪ]  美['ɡruvi]
+
+  adj. 槽的；绝妙的；时髦的
+
+  网络释义:
+  groovy - 绝妙的; 妙趣; 常规的
+  groovy Kootie - 帅气酷迪
+  Groovy Hoops - 小游戏
+8/  describe
+  [dɪ'skraɪb]  英[dɪ'skraɪb]  美[dɪ'skraɪb]
+
+  vt. 描述，形容；描绘
+
+  网络释义:
+  describe - 描绘; 描述; 形容
+  describe tablename - 表的详细描述; 显示具体的表结构; 查询表结构
+  Describe Distriibution - 分布式系统的设计
+9/  manipulate
+  [mə'nɪpjʊleɪt]  英[mə'nɪpjʊleɪt]  美[mə'nɪpjulet]
+
+  vt. 操纵；操作；巧妙地处理；篡改
+
+  网络释义:
+  manipulate - 操作; 操纵; 控制
+  manipulate accounts - 作假帐
+  Manipulate crane - 换料机; 驱动机构
+10/  mixing
+   ['mɪksɪŋ]  英['mɪksɪŋ]  美['mɪksɪŋ]
+
+   n. 混合；[电子] 混频
+   v. 混合（mix的ing形式）
+
+   网络释义:
+   mixing - 混合; 混音; 搅拌
+   mixing chamber - 混合室; 混合室预燃室; 预燃室
+   mixing roller - 开放式混合机; 关闭式混合机; 开放式混淆机
+11/  declarative
+   [dɪ'klærətɪv]  英[dɪ'klærətɪv]  美[dɪ'klærətɪv]
+
+   adj. 宣言的；陈述的，说明的
+
+   网络释义:
+   declarative - 说明的; 声明式; 宣言的
+   Declarative memory - 陈述性记忆; 陈述性记忆; 叙述性记忆
+   declarative sentence - 陈述句; 说明语句; 陈说句
+12/  provide
+   [prə'vaɪd]  英[prə'vaɪd]  美[prə'vaɪd]
+
+   vt. 提供；规定；准备；装备
+   vi. 规定；抚养；作准备
+
+   网络释义:
+   Provide - 提供; 供应; 供给
+   provide for - 供给; 准备; 提供
+   Provide feedback - 提供反馈; 提供回馈
+13/  dependency
+   [dɪ'pend(ə)nsɪ]  英[dɪ'pend(ə)nsɪ]  美[dɪ'pɛndənsi]
+
+   n. 属国；从属；从属物
+
+   网络释义:
+   Dependency - 依赖; 附庸国; 依赖关系
+   Dependency theory - 依赖理论; 依附理论; 依附论
+   Ross Dependency - 新西兰罗斯属地; 罗斯属地; 罗斯附属地
+14/  management
+   ['mænɪdʒm(ə)nt]  英['mænɪdʒm(ə)nt]  美['mænɪdʒmənt]
+
+   n. 管理；管理人员；管理部门；操纵；经营手段
+
+   网络释义:
+   Management - 管理; 经营; 管理学
+   project management - 项目管理; 项目管理; 专案管理
+   Asset Management - 资产管理; 投资管理; 理业务
+15/  flexible
+   ['fleksɪb(ə)l]  英['fleksɪb(ə)l]  美['flɛksəbl]
+
+   adj. 灵活的；柔韧的；易弯曲的
+
+   网络释义:
+   Flexible - 灵活; 有弹性的; 弹性
+   Flexible Mechanisms - 碳交易; 碳交易; 弹性机制
+   Atelier flexible - 弹性制造系统
+16/  practices
+   [ˈpræktɪsɪs]  英[ˈpræktɪsɪs]  美[præktɪsɪs]
+
+   n. 实践（practice的复数）；练习
+   v. 练习（practice的第三人称单数形式）
+
+   网络释义:
+   Practices - 实践; 实务; 练习
+   Agricultural practices - 农业方式; 农业方法; 耕作方法
+   Disciplinazy Practices - 惩戒性措施
+17/  expose
+   [ɪk'spəʊz; ek-]  英[ɪk'spəʊz; ek-]  美[ɪk'spoz；ek-]
+
+   vt. 揭露，揭发；使曝光；显示
+
+   网络释义:
+   Expose - 暴露; 揭露; 使暴露
+   expose to - 暴露; 使暴露; 使曝光
+   expose uncover - 使暴露; 暴露于
+18/  Integration
+美: [ˌɪntəˈɡreɪʃ(ə)n] 英: [ˌɪntɪˈɡreɪʃ(ə)n]
+   集成
+
+   网络释义:
+   Integration - 整合; 一体化; 融合
+   Economic Integration - 经济一体化; 经济全球化; 经济整合
+   Integration testing - 集成测试; 集成测试; 成测试
+
+
+
+
+Gradle is an advanced build system as well as an advanced build toolkit allowing to create custom build logic through plugins. Here are some of its features that made us choose Gradle:
+Domain Specific Language (DSL) based on Groovy, used to describe and manipulate the build logic
+Build files are Groovy based and allow mixing of declarative elements through the DSL and using code to manipulate the DSL elements to provide custom logic.
+Built-in dependency management through Maven and/or Ivy.
+Very flexible. Allows using best practices but doesn’t force its own way of doing things.
+Plugins can expose their own DSL and their own API for build files to use.
+Good Tooling API allowing IDE integration
+
+1/setting.gradle : 这个文件是全局的项目配置文件，里面主要声明一些需要加入gradle的module，for example:include ':cityListView', ':xListView', ':slidelibrary',':jianzhidaren_old'
+2/project build.gradle :这个文件是整个项目的gradle基础配置文件, buildscript{repositories{jcenter()}dependencies{classpath}} allprojects{} task clean
