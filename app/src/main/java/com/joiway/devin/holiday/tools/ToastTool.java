@@ -10,4 +10,5 @@ package com.joiway.devin.holiday.tools;
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
 public class ToastTool {
+
 }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">Holiday</string>
     <string name="happy_everyday">快乐每天</string>
+    <string name="question_one">u like apple ?</string>
+    <string name="question_two">u like orange ?</string>
+    <string name="question_three">u like strawberry ?</string>
+    <string name="question_four">u like waterMelon ?</string>
+    <string name="question_five">u like mango ?</string>
 </resources>

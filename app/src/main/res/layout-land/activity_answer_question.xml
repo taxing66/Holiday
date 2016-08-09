@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/holo_red_light"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:text="do yue love me ?"
+        android:layout_centerInParent="true"
+        android:id="@+id/tv_question"
+        android:textSize="36sp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:layout_width="100dp"
+        android:background="@drawable/shape_oval"
+        android:layout_below="@id/tv_question"
+        android:text="YES"
+        android:id="@+id/btn_yes"
+        android:textColor="@color/white"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_height="100dp" />
+
+    <Button
+        android:layout_width="100dp"
+        android:background="@drawable/shape_oval"
+        android:layout_below="@id/tv_question"
+        android:text="NO"
+        android:layout_alignParentRight="true"
+        android:id="@+id/btn_no"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_height="100dp" />
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_above="@id/tv_question"
+        android:id="@+id/iv_left"
+        android:src="@drawable/shape_layer_list"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        android:layout_height="100dp" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:id="@+id/iv_right"
+        android:layout_alignParentRight="true"
+        android:layout_above="@id/tv_question"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:src="@drawable/shape_layer_list"
+        android:layout_height="100dp" />
+
+</RelativeLayout>

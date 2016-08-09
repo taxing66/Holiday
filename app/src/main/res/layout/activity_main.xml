@@ -19,6 +19,7 @@
         android:layout_width="wrap_content"
         android:id="@+id/iv_clip"
         android:visibility="gone"
+        android:contentDescription="helloo"
         android:layout_centerInParent="true"
         android:background="@drawable/shape_oval"
         android:layout_height="wrap_content" />
