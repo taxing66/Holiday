@@ -62,7 +62,6 @@ public class RevealLayout extends LinearLayout implements Runnable {
 
     private void init() {
         setWillNotDraw(false);
-        mPaint.setColor(getResources().getColor(R.color.reveal_color));
     }
 
     @Override

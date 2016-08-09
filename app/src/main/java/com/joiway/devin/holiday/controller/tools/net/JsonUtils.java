@@ -1,7 +1,5 @@
 package com.joiway.devin.holiday.controller.tools.net;
 
-import android.util.Log;
-
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.joiway.devin.holiday.controller.tools.data.ReflectionUtils;

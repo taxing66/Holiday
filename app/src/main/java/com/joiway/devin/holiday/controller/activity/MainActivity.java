@@ -16,14 +16,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joiway.devin.holiday.R;
-import com.joiway.devin.holiday.controller.tools.system.GlobalMethod;
-import com.joiway.lib.base.cryptolib.CryptoJavaLib;
-import com.joiway.lib.base.cryptolib.CryptoNativeLib;
-import com.joiway.lib.utils.NumberUtils;
-import com.joiway.devin.holiday.controller.tools.data.ReflectionUtils;
-import com.joiway.devin.holiday.model.Son;
-import com.joiway.devin.holiday.controller.tools.system.LogManager;
+import com.joiway.devin.holiday.activity.AbsActivity;
+import com.joiway.devin.holiday.tools.LogManager;
 import com.joiway.devin.holiday.view.CustomDrawable;
+import com.joiway.lib.base.cryptolib.CryptoJavaLib;
+import com.joiway.lib.utils.NumberUtils;
 
 public class MainActivity extends AbsActivity {
     private static final int PRIVATE_TEXT_PLUS_LEVEL = 1;
@@ -56,9 +53,6 @@ public class MainActivity extends AbsActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(this, "hello ", Toast.LENGTH_SHORT).show();
-        LogManager.logDebug(LogManager.DEVELOPER_DEVIN, "MainActivity", "onCreate", "color:" + NumberUtils.transformColor(R.color.reveal_color, R.color.colorPrimary, 40)
-
-        );
         String test = "hello world";
         String test1 = "hello world";
 //        for (int i = 0; i < 1000; i++) {
@@ -92,7 +86,6 @@ public class MainActivity extends AbsActivity {
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvTitle.setText(R.string.happy_everyday);
         btnEnter = (Button) findViewById(R.id.btn_enter);
-        btnStatus = (ImageView) findViewById(R.id.btn_status);
         mDrawable = (ClipDrawable) btnStatus.getDrawable();
         mDrawable.setLevel(8000);
         level = 10000;

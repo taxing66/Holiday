@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package com.joiway.devin.holiday.controller.tools.file;
-
-import com.joiway.devin.holiday.controller.tools.system.LogManager;
+import com.joiway.devin.holiday.tools.LogManager;
 import com.joiway.lib.base.cryptolib.CryptoNativeLib;
 
 import java.io.File;

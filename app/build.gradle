@@ -28,4 +28,6 @@ dependencies {
     compile 'com.readystatesoftware.systembartint:systembartint:1.0.3'
     compile 'com.android.support:recyclerview-v7:24.0.0'
     compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.alibaba:fastjson:1.2.15'
+    compile 'org.xutils:xutils:3.3.36'
 }
