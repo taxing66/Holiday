@@ -4,6 +4,7 @@ import com.joiway.devin.holiday.controller.tools.system.LogManager;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Random;
 
 /**
  * Created by Administrator on 2016/8/6.
@@ -89,5 +90,12 @@ public class GlobalMethod {
         }else{
             return array1 == null && array2 == null;
         }
+    }
+
+    public static byte[] randomBytes(int count) {
+        byte buff[] = new byte[count];
+        Random r = new Random();
+        r.nextBytes(buff);
+        return buff;
     }
 }

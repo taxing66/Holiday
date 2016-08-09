@@ -18,9 +18,6 @@ import java.util.Map;
  * 【GSON模块】
  */
 public class JsonUtils {
-    public static final String toJson(Object src) {
-        return JSON.toJSONString(src);
-    }
 
     public static final <T> T fromJson(String json, Class<T> clazz) {
         return JSON.parseObject(json,clazz);
@@ -34,16 +31,20 @@ public class JsonUtils {
         return JSON.parseObject(json, new TypeReference<HashMap<String, Object>>(){});
     }
 
-    public static final String toJson(Map map){
+    public static final String toJsonString(Map map){
         return JSON.toJSONString(map);
     }
 
+    public static final String toJsonString(Object src) {
+        return JSON.toJSONString(src);
+    }
+
     public static final <T> T fromMap(Map map, Class<T> clazz){
-        String json = toJson(map);
+        String json = toJsonString(map);
         return fromJson(json, clazz);
     }
     public static final <T> T fromMap(Map map, TypeReference<T> types){
-        String json = toJson(map);
+        String json = toJsonString(map);
         return JSON.parseObject(json,types);
     }
     public static final Map<String,Object> toMap(Object object){
@@ -54,7 +55,6 @@ public class JsonUtils {
 
         for (Field field : fields) {
             String name = field.getName();
-            Log.d("devin","name:"+name);
             field.setAccessible(true);
             try{
                 value = field.get(object);

@@ -1,6 +1,6 @@
 package com.joiway.devin.holiday.controller.tools.net;
 
-import com.joiway.devin.holiday.controller.tools.file.CryptoNativeLib;
+import com.joiway.lib.base.cryptolib.CryptoNativeLib;
 import java.io.UnsupportedEncodingException;
 
 /**

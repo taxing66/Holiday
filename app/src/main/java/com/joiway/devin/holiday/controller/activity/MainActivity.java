@@ -16,6 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joiway.devin.holiday.R;
+import com.joiway.devin.holiday.controller.tools.system.GlobalMethod;
+import com.joiway.lib.base.cryptolib.CryptoJavaLib;
+import com.joiway.lib.base.cryptolib.CryptoNativeLib;
+import com.joiway.lib.utils.NumberUtils;
 import com.joiway.devin.holiday.controller.tools.data.ReflectionUtils;
 import com.joiway.devin.holiday.model.Son;
 import com.joiway.devin.holiday.controller.tools.system.LogManager;
@@ -37,7 +41,7 @@ public class MainActivity extends AbsActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case PRIVATE_TEXT_PLUS_LEVEL:
-                    mDrawable.setLevel( + 50);
+                    mDrawable.setLevel(+50);
                     break;
             }
             if (mLevel < 1000) {
@@ -52,8 +56,37 @@ public class MainActivity extends AbsActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toast.makeText(this, "hello ", Toast.LENGTH_SHORT).show();
-         LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate", ReflectionUtils.findMethod(Son.class,"grow",null)
-         .getClass().toString());
+        LogManager.logDebug(LogManager.DEVELOPER_DEVIN, "MainActivity", "onCreate", "color:" + NumberUtils.transformColor(R.color.reveal_color, R.color.colorPrimary, 40)
+
+        );
+        String test = "hello world";
+        String test1 = "hello world";
+//        for (int i = 0; i < 1000; i++) {
+//            test+="hello world";
+//            test1+="hello world";
+//        }
+        try {
+            LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate",CryptoJavaLib.encryptTripleDes(test1));
+            test1  = CryptoJavaLib.encryptTripleDes(test1,CryptoJavaLib.DESEDEKey);
+             LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate",CryptoJavaLib.decryptTripleDes(test1));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate_1", CryptoJavaLib.encryptAes(test));
+            test = CryptoJavaLib.encryptAes(test);
+             LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate_1",CryptoJavaLib.decryptAes(test));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate", CryptoNativeLib.md5("hello world".getBytes()));
+//          LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate", CryptoNativeLib.hexEncode(CryptoNativeLib.md5("hello world".getBytes()).getBytes()));
+//          LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate", CryptoNativeLib.hexDecode(CryptoNativeLib.hexEncode(CryptoNativeLib.md5("hello world".getBytes()).getBytes())).toString());
+//        for (int i = 0; i < GlobalMethod.randomBytes(16).length; i++) {
+//            LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"MainActivity","onCreate",":"+GlobalMethod.randomBytes(16)[i]);
+//        }
+//        LogManager.logDebug(LogManager.DEVELOPER_DEVIN, "MainActivity", "onCreate", ReflectionUtils.findMethod(Son.class, "grow", null)
+//                .getClass().toString());
         initTitleBar();
         mLevel = 0;
         tvTitle = (TextView) findViewById(R.id.tv_title);
@@ -69,16 +102,16 @@ public class MainActivity extends AbsActivity {
             @Override
             public void onClick(View v) {
                 mDrawable = (ClipDrawable) btnStatus.getDrawable();
-                level -=1000;
+                level -= 1000;
                 mDrawable.setLevel(Math.abs(level));
             }
         });
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(MainActivity.this,DemoActivity_2.class);
+                intent = new Intent(MainActivity.this, DemoActivity_2.class);
                 startActivity(intent);
-                ValueAnimator valueAnimator  = ValueAnimator.ofFloat(0f,1f);
+                ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
                 valueAnimator.setDuration(3000);
                 valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
                 valueAnimator.setRepeatMode(ValueAnimator.RESTART);
@@ -110,7 +143,7 @@ public class MainActivity extends AbsActivity {
                     }
                 });
                 valueAnimator.start();
-                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(btnEnter,"alpha",1f,0f);
+                ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(btnEnter, "alpha", 1f, 0f);
 
             }
         });

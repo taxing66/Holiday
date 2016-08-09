@@ -1,4 +1,4 @@
-package com.joiway.devin.holiday.controller.tools.data;
+package com.joiway.lib.utils;
 
 /**
  * 用途描述

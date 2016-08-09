@@ -3,9 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.joiway.devin.holiday.controller.tools.file;
+package com.joiway.lib.base.cryptolib;
 
 import android.util.Base64;
+
+import com.joiway.devin.holiday.controller.tools.system.GlobalKey;
 
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
@@ -18,20 +20,24 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Java版本的加解密库，使用纯Java语言这使用此版本。
+ *
+ * @author 潘阳君
  * @version v0.01
  * @since v0.01
- * @author 潘阳君
  */
 public class CryptoJavaLib {
 
-
+    public static final String DESEDEKey = "ILeonse0629jianzhimaoshiwangzhe123sss";
     private final static String AESDefaultKey = "1234567899123456";
-    private final static String AESKey = "1234567899123456";
+    private final static String AESKey = GlobalKey.KEY_STRING_AES_KEY;
 
     /**
      * Base64解码，输入的String都会被转成UTF-8形式进行解码
@@ -115,14 +121,79 @@ public class CryptoJavaLib {
     }
 
     /**
+     * 数据3DS加密
+     *
+     * @param src    加密字段
+     * @return
+     * @throws Exception
+     */
+    public static String encryptTripleDes(String src) throws Exception {
+        return  encryptTripleDes(src,DESEDEKey);
+    }
+    /**
+     * 数据3DS加密
+     *
+     * @param src    加密字段
+     * @param keyStr 加密的KEY
+     * @return
+     * @throws Exception
+     */
+    public static String encryptTripleDes(String src, String keyStr) throws Exception {
+        DESedeKeySpec dks = new DESedeKeySpec(keyStr.getBytes("UTF-8"));
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");
+        SecretKey secureKey = keyFactory.generateSecret(dks);
+        Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+        cipher.init(Cipher.ENCRYPT_MODE, secureKey);
+        byte[] retByte = cipher.doFinal(src.getBytes());
+        String resultStr = Base64.encodeToString(retByte, Base64.DEFAULT).replaceAll("\r", "").replaceAll("\n", "");
+        return resultStr;
+
+    }
+
+    /**
+     * 数据3DS解密
+     * 3 x 56 = 168个独立的密钥位。
+     * key必须是长度大于等于 3*8 = 24 位
+     *
+     * @param src    解密的数据源
+     * @return
+     * @throws Exception
+     */
+    public static String decryptTripleDes(String src) throws Exception {
+        return  decryptTripleDes(src,DESEDEKey);
+    }
+
+    /**
+     * 数据3DS解密
+     * 3 x 56 = 168个独立的密钥位。
+     * key必须是长度大于等于 3*8 = 24 位
+     *
+     * @param src    解密的数据源
+     * @param keyStr 解密的KEY
+     * @return
+     * @throws Exception
+     */
+    public static String decryptTripleDes(String src, String keyStr) throws Exception {
+        byte[] byteSrc = Base64.decode(src, Base64.DEFAULT);
+        DESedeKeySpec dks = new DESedeKeySpec(keyStr.getBytes("UTF-8"));
+        SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");
+        SecretKey secureKey = keyFactory.generateSecret(dks);
+        Cipher cipher = Cipher.getInstance("DESede/ECB/PKCS5Padding");
+        cipher.init(Cipher.DECRYPT_MODE, secureKey);
+        byte[] retByte = cipher.doFinal(byteSrc);
+        return new String(retByte);
+    }
+
+
+    /**
      * AES CBC 加密
      *
      * @param key AES密钥，必须符合标准AES密钥的长度（16、24、32）。
-     * @param iv AES加密向量，必须符合标准长度（16）
+     * @param iv  AES加密向量，必须符合标准长度（16）
      * @param src 需要加密的数据。
      * @return 加密后的数据，返回null为加密失败
      */
-    public static byte[] AESEncrypt(byte[] key, byte[] iv, byte[] src) throws
+    public static byte[] encryptAes(byte[] key, byte[] iv, byte[] src) throws
             InvalidKeyException,
             InvalidAlgorithmParameterException,
             IllegalBlockSizeException,
@@ -136,7 +207,6 @@ public class CryptoJavaLib {
         Cipher cipher = Cipher.getInstance("AES/CBC/NoPadding");
         cipher.init(Cipher.ENCRYPT_MODE, AesKey, new IvParameterSpec(iv));
         byte[] enc = cipher.doFinal(src);
-        //str = new String(Hex.encode(enc));  
         return enc;
     }
 
@@ -144,11 +214,11 @@ public class CryptoJavaLib {
      * AES CBC 解密
      *
      * @param key AES密钥，必须符合标准AES密钥的长度（16、24、32）。
-     * @param iv AES加密向量，必须符合标准长度（16）
+     * @param iv  AES加密向量，必须符合标准长度（16）
      * @param src 需要解密的数据。
      * @return 解密后的数据，返回null为解密失败
      */
-    public static byte[] AESDecrypt(byte[] key, byte[] iv, byte[] src) throws
+    public static byte[] decryptAes(byte[] key, byte[] iv, byte[] src) throws
             InvalidKeyException,
             InvalidAlgorithmParameterException,
             IllegalBlockSizeException,
@@ -158,56 +228,65 @@ public class CryptoJavaLib {
             NoSuchPaddingException {
 
         SecretKeySpec AesKey = new SecretKeySpec(key, "AES");
-        
         Cipher in = Cipher.getInstance("AES/CBC/NoPadding");
         in.init(Cipher.DECRYPT_MODE, AesKey, new IvParameterSpec(iv));
         byte[] enc = in.doFinal(src);
-        
-        //str = new String(Hex.encode(enc));  
-        return PKCS7Padding.depadding(enc);
+        return PKCS7Padding.dePadding(enc);
     }
 
     private static class PKCS7Padding {
 
         private final static int BLOCK_SIZE = 16;
 
-        public static byte[] depadding(byte[] src) {
-            int padding = src[src.length-1];
+        /**
+         * for example: src  length:48  padding = 14,size = 34
+         *
+         * @param src
+         * @return
+         */
+        public static byte[] dePadding(byte[] src) {
+            int padding = src[src.length - 1];
             int size = src.length - padding;
             byte[] buff = new byte[size];
-            
+
             System.arraycopy(src, 0, buff, 0, size);
             return buff;
         }
 
+        /**
+         * for example: src  length:34  block_size 16  k = 2 j 2 padding =14  buff = 48
+         * 防止：IllegalBlockSizeException:
+         *
+         * @param src
+         * @return
+         */
         public static byte[] padding(byte[] src) {
             int size = src.length;
             int k = size % BLOCK_SIZE;
             int j = size / BLOCK_SIZE;
             int padding = BLOCK_SIZE - k;
-            
-            byte[] buff = new byte[size + padding];
-            
-            System.arraycopy(src, 0, buff, 0, src.length);
-            
-            for (int i = 0; i < padding; i++) {
-                buff[j * BLOCK_SIZE + k + i] = (byte)padding;
-            }
-//            buff[j * BLOCK_SIZE + k + padding] = '\0';
 
+            byte[] buff = new byte[size + padding];
+
+            System.arraycopy(src, 0, buff, 0, src.length);
+
+            for (int i = 0; i < padding; i++) {
+                buff[j * BLOCK_SIZE + k + i] = (byte) padding;
+            }
             return buff;
         }
 
     }
 
+
     /**
-     * 兼职猫 客户端 解密方式
+     * Aes 解密方式
      *
      * @param base64Str
      * @return 服务器数据，返回null为解密失败
      */
-    public static String clientDecrypt(String base64Str) throws Exception {
-        return clientDecrypt(base64Str.getBytes("UTF-8"));
+    public static String decryptAes(String base64Str) throws Exception {
+        return decryptAes(base64Str.getBytes("UTF-8"));
     }
 
     /**
@@ -216,16 +295,13 @@ public class CryptoJavaLib {
      * @param base64Str
      * @return 服务器数据，返回null为解密失败
      */
-    public static String clientDecrypt(byte[] base64Str) throws Exception {
+    public static String decryptAes(byte[] base64Str) throws Exception {
         byte[] src = base64Decode(base64Str);
         byte[] iv = new byte[16];
         byte[] enc = new byte[src.length - iv.length];
-
         System.arraycopy(src, 0, iv, 0, iv.length);
         System.arraycopy(src, iv.length, enc, 0, enc.length);
-
-        byte[] dst = AESDecrypt(AESKey.getBytes(), iv, enc);
-
+        byte[] dst = decryptAes(AESKey.getBytes(), iv, enc);
         return new String(dst, "UTF-8");
     }
 
@@ -253,8 +329,8 @@ public class CryptoJavaLib {
         System.arraycopy(src, 0, iv, 0, iv.length);
         System.arraycopy(src, iv.length, enc, 0, enc.length);
 
-        byte[] dst = AESDecrypt(AESDefaultKey.getBytes(), iv, enc);
-        return null;
+        byte[] dst = decryptAes(AESDefaultKey.getBytes(), iv, enc);
+        return new String(dst);
     }
 
     /**
@@ -263,8 +339,8 @@ public class CryptoJavaLib {
      * @param jsonStr 需要加密的字符串。
      * @return 加密数据，返回null为加密失败
      */
-    public static String clientEncrypt(String jsonStr) throws Exception {
-        return clientEncrypt(jsonStr.getBytes("UTF-8"));
+    public static String encryptAes(String jsonStr) throws Exception {
+        return encryptAes(jsonStr.getBytes("UTF-8"));
     }
 
     /**
@@ -273,88 +349,26 @@ public class CryptoJavaLib {
      * @param jsonStr 需要加密的字符串。
      * @return 加密数据，返回null为加密失败
      */
-    public static String clientEncrypt(byte[] jsonStr) throws Exception {
+    public static String encryptAes(byte[] jsonStr) throws Exception {
         byte[] iv = randomBytes(16);
-        byte[] enc = AESEncrypt(AESKey.getBytes(), iv, jsonStr);
-
+        byte[] enc = encryptAes(AESKey.getBytes(), iv, jsonStr);
         byte[] dst = new byte[iv.length + enc.length];
-
         System.arraycopy(iv, 0, dst, 0, iv.length);
         System.arraycopy(enc, 0, dst, iv.length, enc.length);
-
         return base64Encode(dst);
     }
 
-    /**
-     * 兼职猫 服务端 解密方式
-     *
-     * @param base64Str 兼职猫客户端上传数据。
-     * @param aeskey AES 密钥
-     * @return 客户端加密前的数据，返回null为解密失败
-     */
-    public static String serverDecrypt(String base64Str, byte[] aeskey) throws Exception {
-        return serverDecrypt(base64Str.getBytes("UTF-8"), aeskey);
-    }
 
     /**
-     * 兼职猫 服务端 解密方式
+     * 隨機生成一組byte數組
      *
-     * @param base64Str 兼职猫客户端上传数据。
-     * @param aeskey AES 密钥
-     * @return 客户端加密前的数据，返回null为解密失败
+     * @param count
+     * @return
      */
-    public static String serverDecrypt(byte[] base64Str, byte[] aeskey) throws Exception {
-        byte[] src = base64Decode(base64Str);
-        byte[] iv = new byte[16];
-        byte[] enc = new byte[src.length - iv.length];
-
-        System.arraycopy(src, 0, iv, 0, iv.length);
-        System.arraycopy(src, iv.length, enc, 0, enc.length);
-
-        byte[] dst = AESDecrypt(aeskey, iv, enc);
-
-        return new String(dst, "UTF-8");
-    }
-
-    /**
-     * 兼职猫 服务端 加密方式
-     *
-     * @param jsonStr 兼职猫客户端上传数据。
-     * @param aeskey AES 密钥
-     * @return 加密的数据，返回null为加密失败
-     */
-    public static String serverEncrypt(String jsonStr, byte[] aeskey) throws Exception {
-        return serverEncrypt(jsonStr.getBytes("UTF-8"), aeskey);
-    }
-
-    /**
-     * 兼职猫 服务端 加密方式
-     *
-     * @param jsonStr 兼职猫客户端上传数据。
-     * @param aeskey AES 密钥
-     * @return 加密的数据，返回null为加密失败
-     */
-    public static String serverEncrypt(byte[] jsonStr, byte[] aeskey) throws Exception {
-        byte[] iv = randomBytes(16);
-        byte[] enc = AESEncrypt(aeskey, iv, jsonStr);
-
-        byte[] dst = new byte[iv.length + enc.length];
-
-        System.arraycopy(iv, 0, dst, 0, iv.length);
-        System.arraycopy(enc, 0, dst, iv.length, enc.length);
-
-        return base64Encode(dst);
-    }
-
     private static byte[] randomBytes(int count) {
-//        byte ra;
         byte buff[] = new byte[count];
         Random r = new Random();
         r.nextBytes(buff);
-//        for (int i = 0; i < count; i++) {
-//            ra = ;
-//            buff[i] = ra;
-//        }
         return buff;
     }
 
