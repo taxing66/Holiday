@@ -1,0 +1,40 @@
+1/属性动画(property animation)
+对一个非View的对象进行动画操作
+补间动画机制就是使用硬编码的方式来完成的，功能限定死就是这些，基本上没有任何扩展性可言
+致命的缺陷，就是它只是改变了View的显示效果而已，而不会真正去改变View的属性。
+ValueAnimator是整个属性动画机制当中最核心的一个类
+属性动画的运行机制是通过不断地对值进行操作来实现的，而初始值和结束值之间的动画过渡就是由ValueAnimator这个类来负责计算的
+它的内部使用一种时间循环的机制来计算值与值之间的动画过渡，我们只需要将初始值和结束值提供给ValueAnimator
+ObjectAnimator则就不同了，它是可以直接对任意对象的任意属性进行动画操作的
+其实ObjectAnimator内部的工作机制并不是直接对我们传入的属性名进行操作的，而是会去寻找这个属性名对应的get和set方法，因此alpha属性所对应的get和set方法应该就是：
+前面我们所用的所有属性都是这个工作原理，那么View当中一定也存在着setRotation()、getRotation()、setTranslationX()、getTranslationX()、setScaleY()、getScaleY()这些方法，不信的话你可以到View当中去找一下。
+ObjectAnimator moveIn = ObjectAnimator.ofFloat(textview, "translationX", -500f, 0f);
+ObjectAnimator rotate = ObjectAnimator.ofFloat(textview, "rotation", 0f, 360f);
+ObjectAnimator fadeInOut = ObjectAnimator.ofFloat(textview, "alpha", 1f, 0f, 1f);
+AnimatorSet animSet = new AnimatorSet();
+animSet.play(rotate).with(fadeInOut).after(moveIn);
+animSet.setDuration(5000);
+animSet.start();
+
+通过XML来编写动画可能会比通过代码来编写动画要慢一些，但是在重用方面将会变得非常轻松
+
+sequentially together
+
+Animator animator = AnimatorInflater.loadAnimator(context, R.animator.anim_file);
+animator.setTarget(view);
+animator.start();
+
+TypeEvaluator
+TypeEvaluator的作用到底是什么呢？简单来说，就是告诉动画系统如何从初始值过度到结束值。
+public class FloatEvaluator implements TypeEvaluator {
+    public Object evaluate(float fraction, Object startValue, Object endValue) {
+        float startFloat = ((Number) startValue).floatValue();
+        return startFloat + fraction * (((Number) endValue).floatValue() - startFloat);
+    }
+}
+第一个参数fraction非常重要，这个参数用于表示动画的完成度的
+但实际上ValueAnimator中还有一个ofObject()方法，是用于对任意对象进行动画操作的。但是相比于浮点型或整型数据，对象的动画操作明显要更复杂一些，因为系统将完全无法知道如何从初始对象过度到结束对象，因此这个时候我们就需要实现一个自己的TypeEvaluator来告知系统如何进行过度。
+AttributeSet
+
+This method tells the object to use appropriate information to extract ending values for the animation. For example, a AnimatorSet object will pass this call to its child objects to tell them to set up the values. A ObjectAnimator object will use the information it has about its target object and PropertyValuesHolder objects to get the start values for its properties. A ValueAnimator object will ignore the request since it does not have enough information (such as a target object) to gather these values.
+此方法告诉对象使用适当的信息获取结束动画的值。比例，一个动画组合对象将传递这些到它的子对象告诉它们要设置的值，

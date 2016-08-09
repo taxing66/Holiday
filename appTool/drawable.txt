@@ -1,0 +1,29 @@
+1/drawable
+  ['drɔ:əbl]  英['drɔ:əbl]  美['drɔ:əbl]
+
+  adj. 可拉的，可曳的
+
+  网络释义:
+  drawable - 可绘制的; 图片; 使用
+  Drawable Animation - 帧动画
+  drawable area - 可画区
+  可绘制的；可绘制对象；可曳的
+2/  intrinsic
+  [ɪn'trɪnsɪk]  英[ɪn'trɪnsɪk]  美[ɪn'trɪnsɪk]
+
+  adj. 本质的，固有的
+
+  网络释义:
+  intrinsic - 固有的; 内在; 本征的
+  Intrinsic safety - 本质安全; 本质安全型; 内在安全
+  intrinsic motivation - 内在动机; 内在激励; 内部动机
+
+  shapeDrawable / BitmapDrawable
+  get the with / height  getIntrinsicWidth
+  about : BitmapDrawable ,ShapeDrawable ,LayerDrawable,StateListDrawable.
+  shape Drawable 的实体类是gradientDrawable
+  stateDrawable  attribute : constantSize true/false 固定大小 variablePadding
+  TransitionDrawable 两个视图淡入淡出
+  InsetDrawable 内嵌留空隙
+  scaleDrawable 缩放视图
+

@@ -1,0 +1,32 @@
+1/  decor
+  ['deɪkɔː; 'de-]  英['deɪkɔː; 'de-]  美[de'kɔr]
+
+  n. 装饰，布置
+
+  网络释义:
+  decor - 装饰; 数字电子连续测距(Digital Electronic Continuous Ranging); 装潢
+  decor channel - 达蔻璀丽; 真皮设计
+  interior decor - 壁炉架视为内部装饰; 内饰; 全部陈设
+2/  traversal
+  [trəˈvərs(ə)l]  英[trəˈvərs(ə)l]  美[trəˈvərs(ə)l]
+
+  n. 越过，横过，横贯，穿过；护墙，障碍物
+
+  网络释义:
+  Traversals - 遍历; 编历
+  Binary Tree Traversals - 二叉树的遍历; 二元树之寻访
+3/  hierarchy
+  ['haɪərɑːkɪ]  英['haɪərɑːkɪ]  美['haɪərɑrki]
+
+  n. 层级；等级制度
+
+  网络释义:
+  hierarchy - 等级制度; 层次; 统治集团
+  Memory hierarchy - 内存阶层; 记忆体阶层; 存储层次
+  Hierarchy Viewer - 层级观察器; 设计用户界面利器; 层级察看器
+4/desired
+
+
+onAttach / onVisibilityChanged,onDetach.
+1/ViewRoot DecorView
+performTraversals
