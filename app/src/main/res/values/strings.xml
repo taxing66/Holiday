@@ -6,4 +6,6 @@
     <string name="question_three">u like strawberry ?</string>
     <string name="question_four">u like waterMelon ?</string>
     <string name="question_five">u like mango ?</string>
+    <string name="public_text_cancel">取消</string>
+    <string name="public_text_ok">确定</string>
 </resources>

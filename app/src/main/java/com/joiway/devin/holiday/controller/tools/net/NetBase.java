@@ -1,19 +1,25 @@
 package com.joiway.devin.holiday.controller.tools.net;
 
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.joiway.devin.holiday.controller.Interface.ICallbackBase;
 import com.joiway.devin.holiday.controller.tools.data.ReflectionUtils;
+import com.joiway.devin.holiday.model.net.Header;
 
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
 import org.xutils.http.RequestParams;
+import org.xutils.http.app.RequestTracker;
+import org.xutils.http.request.UriRequest;
 import org.xutils.x;
 
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.net.ssl.SSLSocketFactory;
 
@@ -65,6 +71,67 @@ public abstract class NetBase {
 
     protected synchronized void removeRequest(Callback.CommonCallback callback) {
         mRequestPool.remove(callback);
+    }
+
+    /**
+     * 獲取xUtils 訪問 入參的httpParams;
+     *
+     * @param method
+     * @param URL
+     * @param params
+     * @param callback
+     * @param ssl
+     * @param <P>
+     * @return
+     */
+    protected final <P> RequestParams prepareToProcess(Method method, String URL, P params, RequestCallBack callback, SSLSocketFactory ssl) {
+        if (callback != null) {
+            callback.onStart();
+        }
+
+        Object entity;
+
+        if (params == null) {
+            entity = new Object();
+        } else {
+            entity = params;
+        }
+
+        if (entity == null) {
+            return null;
+        }
+        //使用 xUitls 网络引擎访问
+        RequestParams httpParams = new RequestParams(URL);
+        Field[] fields = ReflectionUtils.getAllField(entity.getClass());
+        for (Field field : fields) {
+            field.setAccessible(true);
+            Object value = null;
+
+            try {
+                value = field.get(entity);//利用反射拿到实体属性的值
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+                Log.e(TAG, "processHttps: 反射取值错误，Class：" + entity.getClass().getName() + " Field:" + field.getName(), e);
+            }
+            if (value != null) {
+                if (value instanceof File) {
+                    if (!httpParams.isMultipart())
+                        httpParams.setMultipart(true);
+                    httpParams.addBodyParameter(field.getName(), (File) value);
+                } else if (value instanceof Number || value instanceof Boolean || value instanceof String) {
+                    //如果类型是 基本类型 则转成String
+                    httpParams.addBodyParameter(field.getName(), value + "");
+                } else {
+                    //如果是 其他Object类型
+                    httpParams.addBodyParameter(field.getName(), JsonUtils.toJsonString(value));
+                }
+            }
+            field.setAccessible(false);
+        }
+
+        if (ssl != null)
+            httpParams.setSslSocketFactory(ssl);
+        return httpParams;
     }
 
     /**
@@ -139,6 +206,136 @@ public abstract class NetBase {
      */
     protected final <P, B> Callback.Cancelable processHttp(final Method method, final String URL, P params, final ICallbackBase<B> callback) {
         return processHttps(method, URL, params, callback, null);
+    }
+
+    /**
+     * 企业版本的执行网络处理
+     *
+     * @param method
+     * @param URL
+     * @param params
+     * @param callback
+     */
+    protected final <P> Callback.Cancelable processHttp(final Method method, final String URL, P params, final RequestCallBack callback) {
+        return processHttps(method, URL, params, callback, null);
+    }
+
+    /**
+     * enterprise 执行网络处理
+     *
+     * @param method
+     * @param URL
+     * @param params
+     */
+    protected final <P> Callback.Cancelable processHttps(final Method method, final String URL, P params, final RequestCallBack requestCallBack, SSLSocketFactory ssl) {
+
+        RequestParams httpParams = prepareToProcess(method, URL, params, requestCallBack, ssl);
+        if(requestCallBack.doOnStart()){
+            httpParams.setRequestTracker(new RequestTracker() {
+                @Override
+                public void onWaiting(RequestParams params) {
+
+                }
+
+                @Override
+                public void onStart(RequestParams params) {
+
+                }
+
+                @Override
+                public void onRequestCreated(UriRequest request) {
+
+                }
+
+                @Override
+                public void onCache(UriRequest request, Object result) {
+
+                }
+
+                @Override
+                public void onSuccess(UriRequest request, Object result) {
+                    if (result == null || !(result instanceof String) || TextUtils.isEmpty((String)result)) {
+                        requestCallBack.doOnException(new Exception("Http response is null"), "Http response is null");
+                        return;
+                    }
+                    requestCallBack.handleStringResponse(doParseHeaderFromXUtilResponse(request), (String)result);
+                }
+
+                private Header doParseHeaderFromXUtilResponse(UriRequest uriRequest){
+                    Header header = null;
+                    if(uriRequest != null){
+                        header = new Header();
+                        Map<String, List<String>> headerMap = uriRequest.getResponseHeaders();
+                        List<String> headerValues;
+                        for(String key : headerMap.keySet()){
+                            if(key != null){
+                                headerValues = headerMap.get(key);
+                                if(headerValues.size() == 1){
+                                    header.put(key.toLowerCase(), headerValues.get(0).toLowerCase());
+                                }else {
+                                    header.put(key.toLowerCase(), headerValues);
+                                }
+                            }
+                        }
+                    }
+                    return header;
+                }
+
+                @Override
+                public void onCancelled(UriRequest request) {
+                    requestCallBack.doOnCancelled();
+                }
+
+                @Override
+                public void onError(UriRequest request, Throwable ex, boolean isCallbackError) {
+                    requestCallBack.doOnException(new Exception(ex), ex.getMessage());
+                }
+
+                @Override
+                public void onFinished(UriRequest request) {
+                }
+            });
+            Callback.CommonCallback<String> cb = new Callback.ProgressCallback<String>() {
+
+                @Override
+                public void onSuccess(String result) {
+                }
+
+                @Override
+                public void onError(Throwable ex, boolean isOnCallback) {
+                    removeRequest(this);
+                }
+
+                @Override
+                public void onCancelled(CancelledException cex) {
+                    removeRequest(this);
+                }
+
+                @Override
+                public void onFinished() {
+                    removeRequest(this);
+                }
+
+                @Override
+                public void onWaiting() {
+                }
+
+                @Override
+                public void onStarted() {
+                }
+
+                @Override
+                public void onLoading(long total, long current, boolean isUploading) {
+                    requestCallBack.doOnLoading(total, current, isUploading);
+                }
+            };
+            //访问
+            return putToRequestPool(cb, process(method, httpParams, cb));
+        }else {
+            return null;
+        }
+
+
     }
 
     /**
@@ -228,7 +425,7 @@ public abstract class NetBase {
      * @throws Throwable
      */
     protected final <P, B> B processHttpsSync(Method method, String URL, P params, Class<B> bClass, SSLSocketFactory ssl) throws Throwable {
-        RequestParams httpParams = prepareToProcess(method, URL, params, null, ssl);
+        RequestParams httpParams = prepareToProcess(method, URL, params, (ICallbackBase<B>)null, ssl);
         return processSync(method, httpParams, bClass);
     }
 

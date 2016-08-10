@@ -123,6 +123,22 @@ public class ReflectionUtils {
         }
         return null;
     }
+
+    /**
+     * 获取泛型类的泛型参数类型
+     *
+     * @param classTarget 泛型类
+     * @return 该泛型类的泛型参数Type数组
+     */
+    public static Type[] getParameterizedTypes(Class classTarget){
+        Type superClass = classTarget.getGenericSuperclass();
+        if(superClass instanceof ParameterizedType){
+            return ((ParameterizedType) superClass).getActualTypeArguments();
+        }else{
+            throw new IllegalArgumentException("不支持获取泛型的类型:" + classTarget.getName());
+        }
+    }
+
     /**
      * 获取 泛型类
      * @param ownerType

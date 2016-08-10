@@ -71,6 +71,21 @@ public class NetManager extends NetBase {
 
     /**
      * 适合 兼职猫的网络请求模块
+     * Http访问
+     *
+     * @param URL
+     * @param params   上报参数实体
+     * @param <P>      上报参数实体必须继承{@link NetAccessEntity}
+     */
+    public static final <P extends NetAccessEntity> Callback.Cancelable httpPost(String URL, P params,  RequestCallBack requestCallBack) {
+        if (sNetManager != null) {
+            return sNetManager.processHttp(Method.POST, URL, params, requestCallBack);
+        }
+        return null;
+    }
+
+    /**
+     * 适合 兼职猫的网络请求模块
      * Https访问
      *
      * @param URL

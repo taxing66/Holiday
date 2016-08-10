@@ -3,4 +3,14 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="activity_padding">36dp</dimen>
+    <dimen name="dialog_margin">30dp</dimen>
+    <dimen name="dialog_text_margin">20dp</dimen>
+    <dimen name="public_size_middle_text">15sp</dimen>
+    <!-- 默认上下左右边距 -->
+    <dimen name="default_padding">12dp</dimen>
+    <dimen name="default_space_of_left">12dp</dimen>
+    <dimen name="default_space_of_top">10dp</dimen>
+    <dimen name="default_space_of_right">12dp</dimen>
+    <dimen name="default_space_of_bottom">10dp</dimen>
+    <dimen name="line_size_m">0.25dp</dimen>
 </resources>
