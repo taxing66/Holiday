@@ -5,7 +5,6 @@ import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.ClipDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -20,7 +19,6 @@ import com.joiway.devin.holiday.activity.AbsActivity;
 import com.joiway.devin.holiday.tools.LogManager;
 import com.joiway.devin.holiday.view.CustomDrawable;
 import com.joiway.lib.base.cryptolib.CryptoJavaLib;
-import com.joiway.lib.utils.NumberUtils;
 
 public class MainActivity extends AbsActivity {
     private static final int PRIVATE_TEXT_PLUS_LEVEL = 1;
@@ -28,9 +26,7 @@ public class MainActivity extends AbsActivity {
     private ImageView ivClip;
     private int mLevel;
     private Button btnEnter;
-    private ImageView btnStatus;
     private Intent intent;
-    private ClipDrawable mDrawable;
     private int level;
     private Handler mHandler = new Handler() {
         @Override
@@ -38,7 +34,6 @@ public class MainActivity extends AbsActivity {
             super.handleMessage(msg);
             switch (msg.what) {
                 case PRIVATE_TEXT_PLUS_LEVEL:
-                    mDrawable.setLevel(+50);
                     break;
             }
             if (mLevel < 1000) {
@@ -86,19 +81,7 @@ public class MainActivity extends AbsActivity {
         tvTitle = (TextView) findViewById(R.id.tv_title);
         tvTitle.setText(R.string.happy_everyday);
         btnEnter = (Button) findViewById(R.id.btn_enter);
-        mDrawable = (ClipDrawable) btnStatus.getDrawable();
-        mDrawable.setLevel(8000);
         level = 10000;
-        CustomDrawable customDrawable = new CustomDrawable(Color.parseColor("#0ac39e"));
-        btnStatus.setImageDrawable(customDrawable);
-        btnStatus.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mDrawable = (ClipDrawable) btnStatus.getDrawable();
-                level -= 1000;
-                mDrawable.setLevel(Math.abs(level));
-            }
-        });
         btnEnter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +124,6 @@ public class MainActivity extends AbsActivity {
             }
         });
         ivClip = (ImageView) findViewById(R.id.iv_clip);
-        mDrawable = (ClipDrawable) ivClip.getDrawable();
 //        mDrawable.setLevel(mDrawable.getLevel()+1000);
         LogManager.logDebug(LogManager.DEVELOPER_DEVIN, "MainActivity", "onCreate", "test_debug");
 //        mHandler.sendEmptyMessage(PRIVATE_TEXT_PLUS_LEVEL);
