@@ -5,6 +5,10 @@ package com.joiway.devin.holiday.controller.tools.system;
  */
 public class GlobalKey {
     /**
+     * 默认错误Toast文案
+     */
+    public static final String VALUE_STRING_DEFAULT_ERROR_TIPS = "网络或系统繁忙";
+    /**
      * AES 加密使用的key
      */
     public static final String KEY_STRING_AES_KEY = "0Mm8eFTNp5o2qXJS";

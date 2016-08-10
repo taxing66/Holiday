@@ -2,7 +2,8 @@ package com.joiway.devin.holiday.model.net;
 
 import android.text.TextUtils;
 
-import com.nt.ptc.enterprise.GlobalKey;
+import com.joiway.devin.holiday.controller.tools.system.GlobalKey;
+
 
 /**
  * 用于fastjson解析，处理整体数据
