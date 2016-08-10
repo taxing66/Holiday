@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.joiway.devin.holiday.R;
 import com.joiway.devin.holiday.activity.AbsActivity;
+import com.joiway.devin.holiday.controller.tools.net.NetManager;
 import com.joiway.devin.holiday.tools.LogManager;
 import com.joiway.devin.holiday.view.CustomDrawable;
 import com.joiway.lib.base.cryptolib.CryptoJavaLib;
@@ -87,6 +88,7 @@ public class MainActivity extends AbsActivity {
             public void onClick(View v) {
                 intent = new Intent(MainActivity.this, DemoActivity_2.class);
                 startActivity(intent);
+
                 ValueAnimator valueAnimator = ValueAnimator.ofFloat(0f, 1f);
                 valueAnimator.setDuration(3000);
                 valueAnimator.setRepeatCount(ValueAnimator.INFINITE);

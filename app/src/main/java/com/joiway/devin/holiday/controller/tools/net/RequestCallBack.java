@@ -41,12 +41,9 @@ public class RequestCallBack<I, O>{
     protected void onStart() {
     }
 
-    protected void onLoading(long total, long current, boolean isUploading) {
-    }
-
     /**
      * 请求成功后，在还没有进行自动化数据解析之前回调，也就是请求成功之后最先调用的成功方法
-     *
+     * 原生請求返回的數據；
      * @param data 请求成功的数据
      */
     protected void onSuccess(Header header, String data) {
@@ -142,16 +139,6 @@ public class RequestCallBack<I, O>{
         }
     }
 
-    public final boolean doOnLoading(long total, long current, boolean isUploading) {
-        try {
-            onLoading(total, current, isUploading);
-            return true;
-        }catch (Exception e){
-            doOnException(e, e.getMessage());
-            return false;
-        }
-    }
-
 
     public final void doOnException(Exception e, String msg) {
         try {
@@ -225,6 +212,7 @@ public class RequestCallBack<I, O>{
                     case RootJson.TYPE_INT_STATUS_SUCCESS:
                         onSuccess(header, dataJson, rootJson.getMsg());
                         break;
+                    //所有網絡請求總攔截：账号被禁用
                     case RootJson.TYPE_INT_STATUS_ACCOUNT_DISABLED:
                         synchronized (sIsShowMessageDialog) {
                             if (mRef != null && mRef.get() != null && !mRef.get().isFinishing() && !sIsShowMessageDialog) {

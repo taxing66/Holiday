@@ -71,6 +71,7 @@ public class SharedPreferencesManager {
 
     /**
      * 获取 sharePreference 的编辑器
+     * 适合同时提交多个轻易级文件的时候
      * @return
      */
     public  SharedPreferences.Editor put(){
@@ -78,11 +79,102 @@ public class SharedPreferencesManager {
     }
 
     /**
-     * 获取得到 sharePreference 实例
+     * 封裝后不需要調用commit
+     * @param key
+     * @param value
+     * @return
+     */
+   public SharedPreferencesManager put(String key,String value){
+       mEditor.putString(key,value);
+       mEditor.commit();
+       return this;
+   }
+
+    /**
+     * 封裝后不需要調用commit
+     * @param key
+     * @param value
+     * @return
+     */
+    public SharedPreferencesManager put(String key,boolean value){
+        mEditor.putBoolean(key,value);
+        mEditor.commit();
+        return this;
+    }
+
+    /**
+     * 封裝后不需要調用commit
+     * @param key
+     * @param value
+     * @return
+     */
+    public SharedPreferencesManager put(String key,int value){
+        mEditor.putInt(key,value);
+        mEditor.commit();
+        return this;
+    }
+
+    /**
+     * 封裝后不需要調用commit
+     * @param key
+     * @param value
+     * @return
+     */
+    public SharedPreferencesManager put(String key,float value){
+        mEditor.putFloat(key,value);
+        mEditor.commit();
+        return this;
+    }
+
+    /**
+     * 封裝后不需要調用commit
+     * @param key
+     * @param value
+     * @return
+     */
+    public SharedPreferencesManager put(String key,long value){
+        mEditor.putLong(key,value);
+        mEditor.commit();
+        return this;
+    }
+
+
+    /**
+     * 获取得到 sharePreference 实例,通过些实例去拿相应的值；
+     * 可能自己传得不到数据时的初始化数据
      * @return
      */
     public SharedPreferences getSpf(){
         return mSharedPreferences;
+    }
+
+    /**
+     * 默认值为空的取字符串方法
+     * @param key
+     * @return
+     */
+    public String getString(String key){
+        return mSharedPreferences.getString(key,"");
+    }
+
+    /**
+     * @param key
+     * @return
+     */
+    public boolean getBoolean(String key){
+        return mSharedPreferences.getBoolean(key,false);
+    }
+
+    public int getInt(String key){
+        return mSharedPreferences.getInt(key,-1);
+    }
+
+    public float getFloat(String key){
+        return mSharedPreferences.getFloat(key,-1);
+    }
+
+    public  long getLong(String key){
+        return mSharedPreferences.getLong(key,-1);
     }
 
 }

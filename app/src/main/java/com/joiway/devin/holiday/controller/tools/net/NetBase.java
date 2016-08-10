@@ -1,11 +1,12 @@
 package com.joiway.devin.holiday.controller.tools.net;
 
 import android.text.TextUtils;
-import android.util.Log;
 
 import com.joiway.devin.holiday.controller.Interface.ICallbackBase;
+import com.joiway.devin.holiday.controller.Interface.impl.RequestTrackerImpl;
 import com.joiway.devin.holiday.controller.tools.data.ReflectionUtils;
 import com.joiway.devin.holiday.model.net.Header;
+import com.joiway.devin.holiday.tools.LogManager;
 
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
@@ -24,32 +25,54 @@ import java.util.Map;
 import javax.net.ssl.SSLSocketFactory;
 
 /**
- * Created by 潘阳君 on 2016/1/11.
- * 【豆浆框架】-【控制层】
- * 【网络模块 内核层】
- * 现使用xUtils网络框架实现的Http/Https访问，如需要更换网络内核则重写该实现即可
+ *现使用xUtils网络框架实现的Http/Https访问，如需要更换网络内核则重写该实现即可
+ * @author 陈德华
+ * @create 2016-08-10
+ * @editer 陈德华
+ * @date 2016-08-10
+ * @docVersion 适用于代码规范v1.0.0版本
+ * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
 public abstract class NetBase {
+    /**
+     * 设备平台
+     */
     public static final String PUBLIC_TEXT_PLATFORM = "platform";
+    /**
+     * 系统
+     */
     public static final String PUBLIC_TEXT_SYSTEM = "system";
+    /**
+     * 时间轴
+     */
     public static final String PUBLIC_TEXT_TIMESTAMP = "timestamp";
+    /**
+     * 版本号
+     */
     public static final String PUBLIC_TEXT_VERSIONS = "versions";
-    public static final String TAG = "NetBase";
+
+    /**
+     * 网络请求池容量
+     */
+    private static final int DEFAULT_REQUEST_POOL_CAPACITY =30;
 
     public enum Method {
         GET, POST
     }
 
     /**
-     * 请求池
+     * 网络请求池
      */
     private HashMap<Callback.CommonCallback, Callback.Cancelable> mRequestPool;
 
     public NetBase() {
-        mRequestPool = new HashMap<>(30);
+        mRequestPool = new HashMap<>(DEFAULT_REQUEST_POOL_CAPACITY);
     }
 
-    public synchronized void cancleAll() {
+    /**
+     * 取消所有的网络请求
+     */
+    public synchronized void cancelAll() {
         Iterator<Callback.Cancelable> list = mRequestPool.values().iterator();
         while (list.hasNext()) {
             Callback.Cancelable cancelable = list.next();
@@ -58,37 +81,41 @@ public abstract class NetBase {
                     cancelable.cancel();
                 } catch (Exception e) {
                     e.printStackTrace();
-                    Log.e(TAG, "cancleAll: " + e.toString(), e);
+                    LogManager.logError(LogManager.DEVELOPER_DEVIN, "NetBase", "cancelAll", "cancelAll: " + e.toString());
                 }
             }
         }
     }
 
-    protected synchronized Callback.Cancelable putToRequestPool(Callback.CommonCallback callback, Callback.Cancelable cancelable) {
+    /**
+     * 把当前的网络请求添加到网络请求池
+     * @param callback
+     * @param cancelable
+     * @return
+     */
+    protected synchronized void putToRequestPool(Callback.CommonCallback callback, Callback.Cancelable cancelable) {
         mRequestPool.put(callback, cancelable);
-        return cancelable;
     }
 
+    /**
+     * 删除指定的请求在请求池
+     * @param callback
+     */
     protected synchronized void removeRequest(Callback.CommonCallback callback) {
         mRequestPool.remove(callback);
     }
 
     /**
-     * 獲取xUtils 訪問 入參的httpParams;
+     * 企业版本獲取xUtils 訪問 入參的httpParams;
      *
-     * @param method
-     * @param URL
+     * @param url
      * @param params
      * @param callback
      * @param ssl
      * @param <P>
      * @return
      */
-    protected final <P> RequestParams prepareToProcess(Method method, String URL, P params, RequestCallBack callback, SSLSocketFactory ssl) {
-        if (callback != null) {
-            callback.onStart();
-        }
-
+    private final <P> RequestParams getRequestParams(String url, P params, RequestCallBack callback, SSLSocketFactory ssl) {
         Object entity;
 
         if (params == null) {
@@ -101,17 +128,18 @@ public abstract class NetBase {
             return null;
         }
         //使用 xUitls 网络引擎访问
-        RequestParams httpParams = new RequestParams(URL);
+        RequestParams httpParams = new RequestParams(url);
+        httpParams.setConnectTimeout(1000 * 10);
+        httpParams.setCharset("UTF-8");
         Field[] fields = ReflectionUtils.getAllField(entity.getClass());
         for (Field field : fields) {
             field.setAccessible(true);
             Object value = null;
-
             try {
                 value = field.get(entity);//利用反射拿到实体属性的值
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
-                Log.e(TAG, "processHttps: 反射取值错误，Class：" + entity.getClass().getName() + " Field:" + field.getName(), e);
+                LogManager.logError(LogManager.DEVELOPER_DEVIN, "NetBase", "getRequestParams", "processHttps: 反射取值错误，Class：" + entity.getClass().getName() + " Field:" + field.getName());
             }
             if (value != null) {
                 if (value instanceof File) {
@@ -135,9 +163,8 @@ public abstract class NetBase {
     }
 
     /**
-     * 獲取xUtils 訪問 入參的httpParams;
+     * 求取端版本獲取xUtils 訪問 入參的httpParams;
      *
-     * @param method
      * @param URL
      * @param params
      * @param callback
@@ -146,7 +173,7 @@ public abstract class NetBase {
      * @param <B>
      * @return
      */
-    protected final <P, B> RequestParams prepareToProcess(Method method, String URL, P params, ICallbackBase<B> callback, SSLSocketFactory ssl) {
+    private final <P, B> RequestParams getRequestParams(String URL, P params, ICallbackBase<B> callback, SSLSocketFactory ssl) {
         if (callback != null) {
             callback.onStart();
         }
@@ -173,7 +200,8 @@ public abstract class NetBase {
                 value = field.get(entity);//利用反射拿到实体属性的值
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
-                Log.e(TAG, "processHttps: 反射取值错误，Class：" + entity.getClass().getName() + " Field:" + field.getName(), e);
+                LogManager.logError(LogManager.DEVELOPER_DEVIN, "NetBase", "getRequestParams", "processHttps: 反射取值错误，Class：" + entity.getClass().getName() + " Field:" + field.getName()
+                );
             }
             if (value != null) {
                 if (value instanceof File) {
@@ -197,27 +225,27 @@ public abstract class NetBase {
     }
 
     /**
-     * 执行网络处理
+     * 求职端执行网络处理
      *
      * @param method
      * @param URL
      * @param params
      * @param callback
      */
-    protected final <P, B> Callback.Cancelable processHttp(final Method method, final String URL, P params, final ICallbackBase<B> callback) {
-        return processHttps(method, URL, params, callback, null);
+    protected final <P, B> void processHttp(final Method method, final String URL, P params, final ICallbackBase<B> callback) {
+         processHttps(method, URL, params, callback, null);
     }
 
     /**
      * 企业版本的执行网络处理
      *
-     * @param method
+     * @param method  tag for post or get
      * @param URL
      * @param params
      * @param callback
      */
-    protected final <P> Callback.Cancelable processHttp(final Method method, final String URL, P params, final RequestCallBack callback) {
-        return processHttps(method, URL, params, callback, null);
+    protected final <P> void processHttp(final Method method, final String URL, P params, final RequestCallBack callback) {
+         processHttps(method, URL, params, callback, null);
     }
 
     /**
@@ -226,79 +254,18 @@ public abstract class NetBase {
      * @param method
      * @param URL
      * @param params
+     * @param requestCallBack
+     * @param ssl
      */
-    protected final <P> Callback.Cancelable processHttps(final Method method, final String URL, P params, final RequestCallBack requestCallBack, SSLSocketFactory ssl) {
+    protected final <P> void processHttps(final Method method, final String URL, P params, final RequestCallBack requestCallBack, SSLSocketFactory ssl) {
 
-        RequestParams httpParams = prepareToProcess(method, URL, params, requestCallBack, ssl);
-        if(requestCallBack.doOnStart()){
-            httpParams.setRequestTracker(new RequestTracker() {
-                @Override
-                public void onWaiting(RequestParams params) {
-
-                }
-
-                @Override
-                public void onStart(RequestParams params) {
-
-                }
-
-                @Override
-                public void onRequestCreated(UriRequest request) {
-
-                }
-
-                @Override
-                public void onCache(UriRequest request, Object result) {
-
-                }
-
-                @Override
-                public void onSuccess(UriRequest request, Object result) {
-                    if (result == null || !(result instanceof String) || TextUtils.isEmpty((String)result)) {
-                        requestCallBack.doOnException(new Exception("Http response is null"), "Http response is null");
-                        return;
-                    }
-                    requestCallBack.handleStringResponse(doParseHeaderFromXUtilResponse(request), (String)result);
-                }
-
-                private Header doParseHeaderFromXUtilResponse(UriRequest uriRequest){
-                    Header header = null;
-                    if(uriRequest != null){
-                        header = new Header();
-                        Map<String, List<String>> headerMap = uriRequest.getResponseHeaders();
-                        List<String> headerValues;
-                        for(String key : headerMap.keySet()){
-                            if(key != null){
-                                headerValues = headerMap.get(key);
-                                if(headerValues.size() == 1){
-                                    header.put(key.toLowerCase(), headerValues.get(0).toLowerCase());
-                                }else {
-                                    header.put(key.toLowerCase(), headerValues);
-                                }
-                            }
-                        }
-                    }
-                    return header;
-                }
-
-                @Override
-                public void onCancelled(UriRequest request) {
-                    requestCallBack.doOnCancelled();
-                }
-
-                @Override
-                public void onError(UriRequest request, Throwable ex, boolean isCallbackError) {
-                    requestCallBack.doOnException(new Exception(ex), ex.getMessage());
-                }
-
-                @Override
-                public void onFinished(UriRequest request) {
-                }
-            });
-            Callback.CommonCallback<String> cb = new Callback.ProgressCallback<String>() {
-
+        RequestParams httpParams = getRequestParams( URL, params, requestCallBack, ssl);
+        if (requestCallBack.doOnStart()) {
+            httpParams.setRequestTracker(new RequestTrackerImpl(requestCallBack) {});
+            Callback.CommonCallback<String> cb = new Callback.CommonCallback<String>() {
                 @Override
                 public void onSuccess(String result) {
+                    removeRequest(this);
                 }
 
                 @Override
@@ -315,40 +282,25 @@ public abstract class NetBase {
                 public void onFinished() {
                     removeRequest(this);
                 }
-
-                @Override
-                public void onWaiting() {
-                }
-
-                @Override
-                public void onStarted() {
-                }
-
-                @Override
-                public void onLoading(long total, long current, boolean isUploading) {
-                    requestCallBack.doOnLoading(total, current, isUploading);
-                }
             };
             //访问
-            return putToRequestPool(cb, process(method, httpParams, cb));
-        }else {
-            return null;
+             putToRequestPool(cb, process(method, httpParams, cb));
         }
-
-
     }
 
+
+
     /**
-     * 执行网络处理
+     * 求职端执行https网络处理
      *
      * @param method
      * @param URL
      * @param params
      * @param callback
      */
-    protected final <P, B> Callback.Cancelable processHttps(final Method method, final String URL, P params, final ICallbackBase<B> callback, SSLSocketFactory ssl) {
+    protected final <P, B> void processHttps(final Method method, final String URL, P params, final ICallbackBase<B> callback, SSLSocketFactory ssl) {
 
-        RequestParams httpParams = prepareToProcess(method, URL, params, callback, ssl);
+        RequestParams httpParams = getRequestParams(URL, params, callback, ssl);
 
         Callback.CommonCallback<String> cb = new Callback.CommonCallback<String>() {
 
@@ -376,7 +328,7 @@ public abstract class NetBase {
                     isOnCallback = true;
 
                 if (isOnCallback) {
-                    faildProcess(ex, callback);
+                    failProcess(ex, callback);
                     if (callback != null)
                         callback.onError(ex);
                 }
@@ -385,7 +337,7 @@ public abstract class NetBase {
 
             @Override
             public void onCancelled(CancelledException cex) {
-                faildProcess(cex, callback);
+                failProcess(cex, callback);
                 removeRequest(this);
             }
 
@@ -397,7 +349,7 @@ public abstract class NetBase {
             }
         };
         //访问
-        return putToRequestPool(cb, process(method, httpParams, cb));
+         putToRequestPool(cb, process(method, httpParams, cb));
     }
 
     /**
@@ -425,18 +377,8 @@ public abstract class NetBase {
      * @throws Throwable
      */
     protected final <P, B> B processHttpsSync(Method method, String URL, P params, Class<B> bClass, SSLSocketFactory ssl) throws Throwable {
-        RequestParams httpParams = prepareToProcess(method, URL, params, (ICallbackBase<B>)null, ssl);
+        RequestParams httpParams = getRequestParams(URL, params, (ICallbackBase<B>) null, ssl);
         return processSync(method, httpParams, bClass);
-    }
-
-    /**
-     * 包装实体数据，一般情况下不使用
-     *
-     * @param entity 实体数据
-     * @return 包装好的实体数据
-     */
-    protected Object pickupParam(Object entity) {
-        return entity;
     }
 
     /**
@@ -446,7 +388,7 @@ public abstract class NetBase {
      * @param params
      * @param callback
      */
-    protected Callback.Cancelable process(Method method, RequestParams params, Callback.CommonCallback<String> callback) {
+    private Callback.Cancelable process(Method method, RequestParams params, Callback.CommonCallback<String> callback) {
         switch (method) {
             case GET:
                 return x.http().get(params, callback);
@@ -456,9 +398,8 @@ public abstract class NetBase {
         return null;
     }
 
-    protected <T> T processSync(Method method, RequestParams params, Class<T> tClass) throws Throwable {
-
-        Log.i(TAG, "request: " + params.toString());
+    private  <T> T processSync(Method method, RequestParams params, Class<T> tClass) throws Throwable {
+         LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"NetBase","processSync","request: " + params.toString());
         switch (method) {
             case GET:
                 return x.http().getSync(params, tClass);
@@ -489,7 +430,7 @@ public abstract class NetBase {
      *
      * @param exception
      */
-    protected abstract void faildProcess(Throwable exception, ICallbackBase callback);
+    protected abstract void failProcess(Throwable exception, ICallbackBase callback);
 
 
 }

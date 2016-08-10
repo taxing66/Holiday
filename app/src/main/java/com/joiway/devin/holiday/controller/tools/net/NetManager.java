@@ -31,10 +31,11 @@ import java.util.regex.Pattern;
 /**
  * 用途描述
  * 网络管理器
- *
- * @author 潘阳君
- * @create 2016/6/24
- * @docVersion 适用于《Android规范v1.0.0 alpha》版本
+ * @author 陈德华
+ * @create 2016-08-10
+ * @editer 陈德华
+ * @date 2016-08-10
+ * @docVersion 适用于代码规范v1.0.0版本
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
 public class NetManager extends NetBase {
@@ -62,11 +63,26 @@ public class NetManager extends NetBase {
      * @param <P>      上报参数实体必须继承{@link NetAccessEntity}
      * @param <B>      返回的参数实体必须继承{@link NetBackEntity}
      */
-    public static final <P extends NetAccessEntity, B extends NetBackEntity> Callback.Cancelable httpPost(String URL, P params, NetCallback<B> callback) {
+    public static final <P extends NetAccessEntity, B extends NetBackEntity> void httpPost(String URL, P params, NetCallback<B> callback) {
         if (sNetManager != null) {
-            return sNetManager.processHttp(Method.POST, URL, params, callback);
+             sNetManager.processHttp(Method.POST, URL, params, callback);
         }
-        return null;
+    }
+
+    /**
+     * 适合 兼职猫的网络请求模块 不需要集体参数的接口
+     * Http访问
+     *
+     * @param URL
+     * @param params   上报参数实体
+     * @param callback 回调
+     * @param <P>      上报参数实体必须继承{@link NetAccessEntity}
+     * @param <B>      返回的参数实体必须继承{@link NetBackEntity}
+     */
+    public static final <P , B extends NetBackEntity> void httpPost(String URL, P params, NetCallback<B> callback) {
+        if (sNetManager != null) {
+            sNetManager.processHttp(Method.POST, URL, params, callback);
+        }
     }
 
     /**
@@ -77,11 +93,10 @@ public class NetManager extends NetBase {
      * @param params   上报参数实体
      * @param <P>      上报参数实体必须继承{@link NetAccessEntity}
      */
-    public static final <P extends NetAccessEntity> Callback.Cancelable httpPost(String URL, P params,  RequestCallBack requestCallBack) {
+    public static final <P extends NetAccessEntity> void httpPost(String URL, P params,  RequestCallBack requestCallBack) {
         if (sNetManager != null) {
-            return sNetManager.processHttp(Method.POST, URL, params, requestCallBack);
+           sNetManager.processHttp(Method.POST, URL, params, requestCallBack);
         }
-        return null;
     }
 
     /**
@@ -93,14 +108,13 @@ public class NetManager extends NetBase {
      * @param callback 回调
      * @param <B>      返回的参数实体必须继承{@link NetBackEntity}
      */
-    public  final <B extends NetBackEntity> Callback.Cancelable httpsPost(String URL, NetAccessEntity params, NetCallback<B> callback) {
+    public  final <B extends NetBackEntity> void httpsPost(String URL, NetAccessEntity params, NetCallback<B> callback) {
         if (sNetManager != null) {
             if (params == null) {
                 params = new NetAccessEntity();
             }
-            return sNetManager.processHttps(Method.POST, URL, params, callback,SSLFactory.getInstance(mContext).getSSLSockeFactory(SSLFactory.VALUE_SSL_FOR_ONLINE));
+           sNetManager.processHttps(Method.POST, URL, params, callback,SSLFactory.getInstance(mContext).getSSLSockeFactory(SSLFactory.VALUE_SSL_FOR_ONLINE));
         }
-        return null;
     }
 
 
@@ -148,23 +162,12 @@ public class NetManager extends NetBase {
 
     @Override
     protected <B> B successProcess(String URL, String serverBack, Class<B> entityClass, ICallbackBase callback) {
-
         B entity = JsonUtils.fromJson(serverBack, entityClass);
         return entity;
     }
 
-
-
-
-
-
-
-
-
-
-
     @Override
-    protected void faildProcess(Throwable exception, ICallbackBase callback) {
+    protected void failProcess(Throwable exception, ICallbackBase callback) {
     }
 
     /**

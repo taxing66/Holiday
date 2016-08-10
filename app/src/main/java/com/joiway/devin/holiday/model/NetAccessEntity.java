@@ -2,6 +2,7 @@ package com.joiway.devin.holiday.model;
 
 
 import com.joiway.devin.holiday.controller.tools.net.JsonUtils;
+import com.joiway.devin.holiday.controller.tools.system.GlobalKey;
 
 import java.io.Serializable;
 
@@ -21,11 +22,12 @@ public class NetAccessEntity implements Serializable{
      * sm :
      */
 
+
     private String timestamp = "";
     private String request_tag = "";
     private String userid = "0";
-    private String versions = "";
-    private String system = "1";
+    private String versions = GlobalKey.VALUE_STRING_APP_VERSION;
+    private String system = GlobalKey.VALUE_STRING_SYSTEM_ANDROID;
     private String token = "0"; //签名授权码
 
     /**
