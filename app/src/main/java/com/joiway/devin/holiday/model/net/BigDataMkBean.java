@@ -1,5 +1,7 @@
 package com.joiway.devin.holiday.model.net;
 
+import com.joiway.devin.holiday.controller.Interface.ISm;
+
 /**
  *大数据请求入参实体
  * @author 陈德华
@@ -9,11 +11,21 @@ package com.joiway.devin.holiday.model.net;
  * @docVersion 适用于代码规范v1.0.0版本
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
-public class BigDataMkBean {
+public class BigDataMkBean  implements ISm{
     private String sys_info;
     private String sys_info_sign;
     private String  type;
     private String userid;
+    private String sm;
+
+    @Override
+    public void setSm(String sm) {
+        this.sm = sm;
+    }
+
+    public String getSm() {
+        return sm;
+    }
 
     public String getSys_info() {
         return sys_info;

@@ -12,6 +12,21 @@ import com.joiway.devin.holiday.controller.tools.system.GlobalKey;
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
 public class NetUrl {
+
+
+    /**
+     * HTTP请求的根地址
+     */
+    public static final String URL_STRING_ROOT_HTTP = GlobalKey.NET_TYPE_STRING_HTTP_SCHEMA + GlobalKey.URL_STRING_HOST_FOR_DEVELOPMENT_80;
+    /**
+     * HTTPS请求的根地址
+     */
+//    public static final String URL_STRING_ROOT_HTTPS = GlobalKey.NET_TYPE_STRING_HTTPS_SCHEMA + GlobalKey.URL_STRING_TEST_HOST_FOR_HTTPS;
+    public static final String URL_STRING_ROOT_HTTPS = URL_STRING_ROOT_HTTP;
+    /**
+     * 检查奖金提现次数
+     */
+    public static final String URL_STRING_GET_BONUS_WITHDRAW_COUNT = URL_STRING_ROOT_HTTP + "bonus/checkGetBonus";
     /**
      * 大数据统计请求的根地址
      */

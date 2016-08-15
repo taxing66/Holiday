@@ -15,6 +15,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.joiway.devin.holiday.R;
+import com.joiway.devin.holiday.controller.tools.net.NetManager;
+import com.joiway.devin.holiday.controller.tools.net.RequestCallBack;
+import com.joiway.devin.holiday.model.constant.NetUrl;
+import com.joiway.devin.holiday.model.net.DataJson;
+import com.joiway.devin.holiday.model.net.GetBonusWithdrawCount;
+import com.joiway.devin.holiday.model.net.Header;
 import com.joiway.devin.holiday.tools.LogManager;
 import com.joiway.devin.holiday.view.HorizontalScrollViewEx;
 
@@ -41,6 +47,27 @@ public class DemoActivity_1 extends Activity {
         final int screenWidth = MyUtils.getScreenMetrics(this).widthPixels;
         final int screenHeight = MyUtils.getScreenMetrics(this).heightPixels;
          LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"DemoActivity_1","initView","screenW:"+screenWidth+":"+screenHeight);
+        GetBonusWithdrawCount getBonusWithdrawCount = new GetBonusWithdrawCount();
+        getBonusWithdrawCount.setKey_string_money_sum("44");
+        getBonusWithdrawCount.setKey_string_total_money("434");
+        getBonusWithdrawCount.setKey_string_withdraw_type("2");
+        NetManager.httpPost(NetUrl.URL_STRING_GET_BONUS_WITHDRAW_COUNT,getBonusWithdrawCount,new RequestCallBack<String,String>(this){
+            @Override
+            protected void onStart() {
+                super.onStart();
+            }
+
+            @Override
+            protected void onSuccess(Header header, DataJson<String, String> data, String msg) {
+                super.onSuccess(header, data, msg);
+            }
+
+            @Override
+            protected void onFinally() {
+                super.onFinally();
+            }
+        });
+
         for (int i = 0; i < 3; i++) {
             ViewGroup layout = (ViewGroup) inflater.inflate(
                     R.layout.content_layout, mListContainer, false);

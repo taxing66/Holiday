@@ -6,6 +6,15 @@ import com.joiway.devin.holiday.BuildConfig;
  * Created by Administrator on 2016/8/9.
  */
 public class GlobalKey {
+    public static final String KEY_STRING_IS_MK_REGISTER = "is_mk_register";
+    /**
+     * Intent传递Extra数据key - user ID
+     */
+    public static final String INTENT_KEY_STRING_USER_ID = "intent_key_string_user_id";
+    /**
+     * 80端口开发服务器主机
+     */
+    public static final String URL_STRING_HOST_FOR_DEVELOPMENT_80 = "192.168.1.148:80/";
 
     //网络请求相关配置
     /**

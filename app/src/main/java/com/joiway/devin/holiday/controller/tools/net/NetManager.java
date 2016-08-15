@@ -100,6 +100,20 @@ public class NetManager extends NetBase {
     }
 
     /**
+     * 适合 不需要全局参数的网络请求
+     * Http访问
+     *
+     * @param URL
+     * @param params   上报参数实体
+     * @param <P>      上报参数实体必须继承{@link NetAccessEntity}
+     */
+    public static final <P> void httpPost(String URL, P params,  RequestCallBack requestCallBack) {
+        if (sNetManager != null) {
+            sNetManager.processHttp(Method.POST, URL, params, requestCallBack);
+        }
+    }
+
+    /**
      * 适合 兼职猫的网络请求模块
      * Https访问
      *

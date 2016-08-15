@@ -2,12 +2,17 @@ package com.joiway.devin.holiday.model.single;
 
 import android.text.TextUtils;
 
+import com.joiway.devin.holiday.controller.Interface.ISm;
 import com.joiway.devin.holiday.controller.tools.net.NetManager;
+import com.joiway.devin.holiday.controller.tools.net.RequestCallBack;
 import com.joiway.devin.holiday.controller.tools.system.GlobalKey;
 import com.joiway.devin.holiday.controller.tools.system.HolidayApplication;
 import com.joiway.devin.holiday.controller.tools.system.NetUtils;
 import com.joiway.devin.holiday.model.constant.NetUrl;
 import com.joiway.devin.holiday.model.constant.PostEnterParam;
+import com.joiway.devin.holiday.model.net.BigDataMkBean;
+import com.joiway.devin.holiday.model.net.DataJson;
+import com.joiway.devin.holiday.model.net.Header;
 import com.joiway.devin.holiday.tools.LogManager;
 import com.joiway.lib.base.cryptolib.CryptoJavaLib;
 import com.joiway.lib.security.PhoneSec;
@@ -27,7 +32,7 @@ import java.io.Serializable;
  * @docVersion 适用于代码规范v1.0.0版本
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
-public class EnterpriseNetAccessEntity implements Serializable {
+public class EnterpriseNetAccessEntity implements Serializable ,ISm {
     /**
      * 大数据统计状态 - 没有初始化
      */
@@ -44,6 +49,8 @@ public class EnterpriseNetAccessEntity implements Serializable {
      * 大数据统计状态 - 正在注册中
      */
     private static final int VALUE_INT_MK_REGISTER_STATUS_PROCESSING = 3;
+
+    private String companyId;
     /**
      * 大数据统计注册状态
      */
@@ -52,10 +59,62 @@ public class EnterpriseNetAccessEntity implements Serializable {
     private String versions = GlobalKey.VALUE_STRING_APP_VERSION;
     private String system =GlobalKey.VALUE_STRING_SYSTEM_ANDROID;
     private String sStatisticsData;
+    private String sm;
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public String getVersions() {
+        return versions;
+    }
+
+    public void setVersions(String versions) {
+        this.versions = versions;
+    }
+
+    public String getSystem() {
+        return system;
+    }
+
+    public void setSystem(String system) {
+        this.system = system;
+    }
+
+    public String getsStatisticsData() {
+        return sStatisticsData;
+    }
+
+    public void setsStatisticsData(String sStatisticsData) {
+        this.sStatisticsData = sStatisticsData;
+    }
+
+    public String getSm() {
+        return sm;
+    }
+
+    @Override
+    public void setSm(String sm) {
+        this.sm = sm;
+    }
+
+    public String getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(String companyId) {
+        this.companyId = companyId;
+    }
 
     public EnterpriseNetAccessEntity(){
         this.timestamp = String.valueOf(System.currentTimeMillis());
+        //大数据数据注册
         this.sStatisticsData = getStatisticsData();
+        this.companyId = HolidayApplication.getInstance().getSpfManager().getString(GlobalKey.INTENT_KEY_STRING_USER_ID);
     }
 
     /**
@@ -105,47 +164,44 @@ public class EnterpriseNetAccessEntity implements Serializable {
                     }
                 }
                 String mk = PhoneSec.makeMK(HolidayApplication.getInstance());
-//                NetManager.httpPost(NetUrl.URL_STRING_BIG_DATA_MK,);
-//                String sm = MD5Util.MD5ExamNum(sysInfo + mk + PostEnterParam.VALUE_STRING_DEVICE_ANDROID + sCompID, GlobalKey.VALUE_STRING_SM_KEY_FOR_BIGDATA).toString();
-//                NetHelper.build(NetUrl.URL_STRING_BIG_DATA_MK)
-//                        .addBodyParameter(PostEnterParam.KEY_STRING_SYS_INFO, sysInfo)
-//                        .addBodyParameter(PostEnterParam.KEY_STRING_SYS_INFO_SIGN, mk)
-//                        .addBodyParameter(PostEnterParam.KEY_STRING_TYPE, PostEnterParam.VALUE_STRING_DEVICE_ANDROID)
-//                        .addBodyParameter("userid", sCompID)
-//                        .addBodyParameter(PostEnterParam.KEY_STRING_SM, sm)
-//                        .sendPostDirect(new RequestCallBack<String, String>(null) {
-//                            @Override
-//                            public void onStart() {
-//                                synchronized (NetHelper.sMKRegisterStatus){
-//                                    NetHelper.sMKRegisterStatus = NetHelper.VALUE_INT_MK_REGISTER_STATUS_PROCESSING;
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onSuccess(Header header, DataJson data, String msg) {
-//                                synchronized (NetHelper.sMKRegisterStatus){
-//                                    NetHelper.sMKRegisterStatus = NetHelper.VALUE_INT_MK_REGISTER_STATUS_YES;
-//                                    PtcApplication.getInstance().getPf().doPut().putBoolean(PtcSharedPreferences.KEY_STRING_IS_MK_REGISTER, true).commit();
-//                                    GlobalMethods.customLog(GlobalKey.TYPE_INT_LOG_VERBOSE, null, "register mk success");
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onException(Exception e, String msg) {
-//                                synchronized (NetHelper.sMKRegisterStatus){
-//                                    NetHelper.sMKRegisterStatus = NetHelper.VALUE_INT_MK_REGISTER_STATUS_NO;
-//                                    GlobalMethods.customLog(GlobalKey.TYPE_INT_LOG_ERROR, null, "register mk fail:\n" + e.toString());
-//                                }
-//                            }
-//
-//                            @Override
-//                            public void onUnCatchStatus(Header header, int status, String msg, DataJson data) {
-//                                synchronized (NetHelper.sMKRegisterStatus){
-//                                    NetHelper.sMKRegisterStatus = VALUE_INT_MK_REGISTER_STATUS_NO;
-//                                    GlobalMethods.customLog(GlobalKey.TYPE_INT_LOG_ERROR, null, "register mk fail:" + msg);
-//                                }
-//                            }
-//                        });
+                BigDataMkBean bigDataMkBean = new BigDataMkBean();
+                bigDataMkBean.setSys_info(sysInfo);
+                bigDataMkBean.setSys_info_sign(mk);
+                bigDataMkBean.setType(GlobalKey.VALUE_STRING_SYSTEM_ANDROID);
+                bigDataMkBean.setUserid(companyId);
+                NetManager.httpPost(NetUrl.URL_STRING_BIG_DATA_MK,bigDataMkBean,new RequestCallBack<String, String>(null) {
+                            @Override
+                            public void onStart() {
+                                synchronized (sMKRegisterStatus){
+                                  sMKRegisterStatus =VALUE_INT_MK_REGISTER_STATUS_PROCESSING;
+                                }
+                            }
+
+                            @Override
+                            public void onSuccess(Header header, DataJson data, String msg) {
+                                synchronized (sMKRegisterStatus){
+                                   sMKRegisterStatus = VALUE_INT_MK_REGISTER_STATUS_YES;
+                                    HolidayApplication.getInstance().getSpfManager().put(GlobalKey.KEY_STRING_IS_MK_REGISTER, true);
+                                   LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"EnterpriseNetAccessEntity","onSuccess","register mk success");
+                                }
+                            }
+
+                            @Override
+                            public void onException(Exception e, String msg) {
+                                synchronized (sMKRegisterStatus){
+                                    sMKRegisterStatus = VALUE_INT_MK_REGISTER_STATUS_NO;
+                                    LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"EnterpriseNetAccessEntity","onException","register mk fail:\n" + e.toString());
+                                }
+                            }
+
+                            @Override
+                            public void onUnCatchStatus(Header header, int status, String msg, DataJson data) {
+                                synchronized (sMKRegisterStatus){
+                                    sMKRegisterStatus = VALUE_INT_MK_REGISTER_STATUS_NO;
+                                     LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"EnterpriseNetAccessEntity","onUnCatchStatus","register mk fail:" + msg);
+                                }
+                            }
+                        });
             }
         }
     }

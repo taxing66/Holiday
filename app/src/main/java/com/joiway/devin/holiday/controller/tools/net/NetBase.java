@@ -3,10 +3,13 @@ package com.joiway.devin.holiday.controller.tools.net;
 import android.text.TextUtils;
 
 import com.joiway.devin.holiday.controller.Interface.ICallbackBase;
+import com.joiway.devin.holiday.controller.Interface.ISm;
 import com.joiway.devin.holiday.controller.Interface.impl.RequestTrackerImpl;
 import com.joiway.devin.holiday.controller.tools.data.ReflectionUtils;
 import com.joiway.devin.holiday.model.net.Header;
+import com.joiway.devin.holiday.model.single.EnterpriseNetAccessEntity;
 import com.joiway.devin.holiday.tools.LogManager;
+import com.joiway.lib.base.cryptolib.CryptoJavaLib;
 
 import org.xutils.common.Callback;
 import org.xutils.ex.HttpException;
@@ -16,11 +19,17 @@ import org.xutils.http.request.UriRequest;
 import org.xutils.x;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.lang.reflect.Field;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.net.ssl.SSLSocketFactory;
 
@@ -34,6 +43,8 @@ import javax.net.ssl.SSLSocketFactory;
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
 public abstract class NetBase {
+
+    public final static String SMKey = "110jiuws5424.132fdsfei(";
     /**
      * 设备平台
      */
@@ -123,7 +134,11 @@ public abstract class NetBase {
         } else {
             entity = params;
         }
-
+        //排序计算
+        String smValue;
+        smValue = toSM(params);
+        if (params instanceof ISm)
+        ((ISm)params).setSm(smValue);
         if (entity == null) {
             return null;
         }
@@ -163,6 +178,108 @@ public abstract class NetBase {
     }
 
     /**
+     * 添加SM计算
+     *
+     * @param params
+     * @return
+     */
+    private final static <P> String toSM(P params) {
+        ArrayList<String> paramlist = new ArrayList<>();
+
+        Field[] fields = ReflectionUtils.getAllField(params.getClass());
+
+        //设值
+        for (Field field : fields) {
+            String name = field.getName();
+            if (!name.equals("sm")) {
+                paramlist.add(name);
+            }
+        }
+        return toSM(params, paramlist);
+    }
+
+    public static <P> String toSM(P params, ArrayList<String> paramName) {
+        return toSM(params, paramName, SMKey);
+    }
+
+    /**
+     * @param params
+     * @param paramName
+     * @param x         计算SM 的因子
+     * @return
+     */
+    private final static <P> String toSM(P params, ArrayList<String> paramName, String x) {
+        String smValue = "";
+
+        Class pClass = params.getClass();
+
+        //排序计算 根据字母顺序排序
+        Collections.sort(paramName);
+        for (String name : paramName) {
+            Object value;
+            try {
+                Field field = ReflectionUtils.findFieldWithLoopThrough(pClass, name);
+                if (field == null)
+                    throw new NoSuchFieldException(pClass.getName() + " 找不到字段：" + name);
+
+                field.setAccessible(true);
+                value = field.get(params);
+
+                if (value == null) continue;
+
+                if (value instanceof File) {
+                    String md5;
+                    try {
+                        md5 = CryptoJavaLib.md5(getFileBytes((File) value));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        md5 = "0";
+                    }
+                    smValue += md5;
+                } else {
+
+                    //如果类型是 基本类型 则转成String
+                    if (value instanceof Number || value instanceof Boolean || value instanceof String) {
+                        smValue += String.valueOf(value);
+                    } else {
+                        //如果是 其他Object类型
+                        smValue += JsonUtils.toJsonString(value);
+                    }
+                }
+                field.setAccessible(false);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+
+        String s1 = getEgNum(smValue);
+        try {
+            s1 = CryptoJavaLib.md5((s1 + x).getBytes());//密码因子，增加破解难度
+            return CryptoJavaLib.md5(s1.getBytes());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private static String getEgNum(String s) {
+        String regEx = "[^a-zA-Z0-9]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m1 = p.matcher(s);
+        return m1.replaceAll("").trim();
+    }
+
+    private final static byte[] getFileBytes(File f) throws Exception {
+        byte[] buff = new byte[(int) f.length()];
+        FileInputStream fin = new FileInputStream(f);
+        fin.read(buff);
+        fin.close();
+        return buff;
+    }
+
+    /**
      * 求取端版本獲取xUtils 訪問 入參的httpParams;
      *
      * @param URL
@@ -186,6 +303,11 @@ public abstract class NetBase {
             entity = params;
         }
 
+        //排序计算
+        String smValue;
+        smValue = toSM(params);
+        if (params instanceof ISm)
+            ((ISm)params).setSm(smValue);
         if (entity == null) {
             return null;
         }
