@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.joiway.devin.holiday.activity.DemoActivity_1;
+import com.joiway.devin.holiday.activity.XUtilsActivity;
 import com.joiway.devin.holiday.controller.tools.system.GlobalMethod;
 import com.joiway.devin.holiday.R;
 import com.joiway.devin.holiday.model.GrandParents;
@@ -39,7 +40,7 @@ public class DemoActivity_2 extends Activity {
 
             }
         } else if (v.getId() == R.id.button2) {
-            Intent intent = new Intent(this, DemoActivity_1.class);
+            Intent intent = new Intent(this, XUtilsActivity.class);
             startActivity(intent);
         } else if (v.getId() == R.id.button3) {
             Intent intent = new Intent(this, DemoActivity_2.class);

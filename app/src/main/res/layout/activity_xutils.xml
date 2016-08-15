@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="one button"
+        android:id="@+id/btn_one"
+        android:layout_marginTop="@dimen/activity_padding"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/et_two"
+        android:layout_gravity="center_horizontal"/>
+
+    <TextClock
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tc_clock"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"
+        android:textSize="@dimen/activity_vertical_margin"
+        tools:targetApi="jelly_bean_mr1"/>
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/abc_action_bar_title_item"
+        android:layout_gravity="center_horizontal"/>
+
+    <fragment
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:name="android.app.DialogFragment"
+        android:id="@+id/ft_text"/>
+
+    <android.support.v7.widget.DialogTitle
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/dt_last"/>
+
+</LinearLayout>
