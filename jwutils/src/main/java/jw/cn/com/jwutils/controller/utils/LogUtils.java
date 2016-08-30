@@ -1,9 +1,6 @@
-package com.joiway.devin.holiday.tools;
+package jw.cn.com.jwutils.controller.utils;
 
 import android.util.Log;
-
-import com.joiway.devin.holiday.BuildConfig;
-import com.joiway.devin.holiday.controller.tools.system.GlobalKey;
 
 /**
  *log 工具类 管理log
@@ -16,11 +13,11 @@ import com.joiway.devin.holiday.controller.tools.system.GlobalKey;
  * @docVersion 适用于代码规范v1.0.0版本
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
-public final class LogManager {
+public final class LogUtils {
     //项目开发开发人员：devin
     public static final String DEVELOPER_DEVIN ="developer_devin";
-    private static final boolean isDebug = BuildConfig.DEBUG;
-    private LogManager(){}
+    private static final boolean isDebug = true;
+    private LogUtils(){}
 
 
     /**

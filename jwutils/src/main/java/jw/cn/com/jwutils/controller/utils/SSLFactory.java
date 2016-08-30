@@ -1,9 +1,6 @@
-package com.joiway.devin.holiday.controller.tools.net;
+package jw.cn.com.jwutils.controller.utils;
 
 import android.content.Context;
-
-import com.joiway.devin.holiday.R;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -67,17 +64,17 @@ public class SSLFactory {
 
 
     public SSLSocketFactory getSSLSockeFactory(int mode) {
-        switch (mode) {
-            case VALUE_SSL_FOR_TEST:
-                setSSLParameters(R.raw.client_62_p12, R.raw.truststore_62_p12, "j13579w", "client_62_p12", "truststore_62_p12");
-                break;
-            case VALUE_SSL_FOR_PRE_ONLINE:
-                setSSLParameters(R.raw.client_9005_p12, R.raw.truststore_9005_p12, "j13579w", "client_9005_p12", "truststore_9005_p12");
-                break;
-            default:
-                setSSLParameters(R.raw.client_p12_test, R.raw.truststore_p12_test, "20jw15gz", "client_p12_test", "truststore_p12_test");
-                break;
-        }
+//        switch (mode) {
+//            case VALUE_SSL_FOR_TEST:
+//                setSSLParameters(jw.cn.com.jwutils.R.raw.client_62_p12, R.raw.truststore_62_p12, "j13579w", "client_62_p12", "truststore_62_p12");
+//                break;
+//            case VALUE_SSL_FOR_PRE_ONLINE:
+//                setSSLParameters(R.raw.client_9005_p12, R.raw.truststore_9005_p12, "j13579w", "client_9005_p12", "truststore_9005_p12");
+//                break;
+//            default:
+//                setSSLParameters(R.raw.client_p12_test, R.raw.truststore_p12_test, "20jw15gz", "client_p12_test", "truststore_p12_test");
+//                break;
+//        }
         return getSSLSocketFactory(mKeyInput, mTrustStoreInput, mPwd);
     }
 

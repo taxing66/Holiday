@@ -14,18 +14,22 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.TypeReference;
 import com.joiway.devin.holiday.R;
 import com.joiway.devin.holiday.controller.tools.net.NetManager;
 import com.joiway.devin.holiday.controller.tools.net.RequestCallBack;
+import com.joiway.devin.holiday.model.UpdateConfigBackBean;
 import com.joiway.devin.holiday.model.constant.NetUrl;
 import com.joiway.devin.holiday.model.net.DataJson;
 import com.joiway.devin.holiday.model.net.GetBonusWithdrawCount;
 import com.joiway.devin.holiday.model.net.Header;
+import com.joiway.devin.holiday.model.net.incoming.UpdateConfigIncomingBean;
 import com.joiway.devin.holiday.tools.LogManager;
 import com.joiway.devin.holiday.view.HorizontalScrollViewEx;
 
 import java.util.ArrayList;
 
+import jw.cn.com.jwutils.model.bean.NetOutputParameterBean;
 import utils.MyUtils;
 
 public class DemoActivity_1 extends Activity {
@@ -60,6 +64,12 @@ public class DemoActivity_1 extends Activity {
             @Override
             protected void onSuccess(Header header, DataJson<String, String> data, String msg) {
                 super.onSuccess(header, data, msg);
+                UpdateConfigIncomingBean  updateConfigIncomingBean = new UpdateConfigIncomingBean();
+                try {
+                    NetOutputParameterBean<UpdateConfigBackBean,Object> netOutputParameterBean = jw.cn.com.jwutils.controller.net.NetManager.httpPostSync("www.baidu.com",updateConfigIncomingBean,new TypeReference<NetOutputParameterBean<UpdateConfigIncomingBean,Object>>(){});
+                }catch (Throwable e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
