@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">JwUtils</string>
+    <!-- oks_string -->
+    <string name="public_text_cancel">取消</string>
+    <string name="public_text_ok">确定</string>
+    <string name="contain">确定</string>
 </resources>

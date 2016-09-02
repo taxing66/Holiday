@@ -2,10 +2,15 @@ package jw.cn.com.jwutils.controller.utils;
 
 import android.text.TextUtils;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 /**
  *文件工具类
@@ -94,6 +99,53 @@ public class FileUtils {
             }
         }
         return false;
+    }
+
+    /**
+     * 如果File存在，并且是空文件夹或者文件，则直接删除
+     *
+     * @param file 删除File
+     * @return 是否成功删除
+     */
+    public static boolean doDeleteFile(File file) {
+        if (file != null && file.exists()) {
+            if (file.isFile()) {
+                return file.delete();
+            } else if (file.isDirectory() && file.listFiles().length == 0) {
+                return file.delete();
+            } else {
+                return false;
+            }
+        } else {
+            return false;
+        }
+    }
+
+    public static String doReadStringFromFile(File file) {
+        if (file == null || !file.exists() || file.isDirectory()) {
+            return null;
+        }
+        try {
+            FileInputStream fis = new FileInputStream(file);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fis, "UTF-8"));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line);
+            }
+            reader.close();
+            fis.close();
+            return sb.toString().trim();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public static boolean fileCopyFile(File srcFile,File toFile){

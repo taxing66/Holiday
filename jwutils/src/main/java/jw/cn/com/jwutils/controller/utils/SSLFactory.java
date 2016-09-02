@@ -1,6 +1,8 @@
 package jw.cn.com.jwutils.controller.utils;
 
 import android.content.Context;
+import android.text.TextUtils;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.security.KeyManagementException;
@@ -17,6 +19,8 @@ import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
 
+import jw.cn.com.jwutils.model.JWConfigBean;
+
 /**
  * SSL generate tools
  * @author 陈德华
@@ -28,18 +32,6 @@ import javax.net.ssl.TrustManagerFactory;
  */
 public class SSLFactory {
 
-    /**
-     * 测试网需要的SSL
-     */
-    public static final int VALUE_SSL_FOR_TEST = 1;
-    /**
-     * 正式发布网需要的SSL
-     */
-    public static final int VALUE_SSL_FOR_ONLINE = 2;
-    /**
-     * 预发布网需要的SSL
-     */
-    public static final int VALUE_SSL_FOR_PRE_ONLINE = 3;
     private static final String KEY_STORE_TYPE_P12 = "PKCS12";
     private InputStream mKeyInput;
     private InputStream mTrustStoreInput;
@@ -47,34 +39,39 @@ public class SSLFactory {
     private static SSLFactory mSSLFactory;
     private Context context;
 
-    public static SSLFactory getInstance(Context context) {
+    public static SSLFactory getInstance() {
         if (mSSLFactory == null) {
             synchronized (SSLFactory.class) {
                 if (mSSLFactory == null) {
-                    mSSLFactory = new SSLFactory(context);
+                    mSSLFactory = new SSLFactory();
                 }
             }
         }
         return mSSLFactory;
     }
 
-    private SSLFactory(Context context) {
-        this.context = context.getApplicationContext();
+    private SSLFactory() {
+
     }
 
-
-    public SSLSocketFactory getSSLSockeFactory(int mode) {
-//        switch (mode) {
-//            case VALUE_SSL_FOR_TEST:
-//                setSSLParameters(jw.cn.com.jwutils.R.raw.client_62_p12, R.raw.truststore_62_p12, "j13579w", "client_62_p12", "truststore_62_p12");
-//                break;
-//            case VALUE_SSL_FOR_PRE_ONLINE:
-//                setSSLParameters(R.raw.client_9005_p12, R.raw.truststore_9005_p12, "j13579w", "client_9005_p12", "truststore_9005_p12");
-//                break;
-//            default:
-//                setSSLParameters(R.raw.client_p12_test, R.raw.truststore_p12_test, "20jw15gz", "client_p12_test", "truststore_p12_test");
-//                break;
-//        }
+    public SSLSocketFactory getSSLSocketFactory(JWConfigBean configBean) {
+        context = configBean.getApplication();
+        if (!TextUtils.isEmpty(configBean.getHttpsClientAssetStr())){
+            try {
+                mKeyInput = context.getAssets().open(configBean.getHttpsClientAssetStr());
+                mTrustStoreInput = context.getAssets().open(configBean.getHttpsTrustKeystoreAssetStr());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }else {
+            try {
+                mKeyInput = context.getResources().openRawResource(configBean.getHttpsClientKeystoreRawId());
+                mTrustStoreInput = context.getResources().openRawResource(configBean.getHttpsTrustKeystoreRawId());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        mPwd = configBean.getHttpsKeystorePwd();
         return getSSLSocketFactory(mKeyInput, mTrustStoreInput, mPwd);
     }
 

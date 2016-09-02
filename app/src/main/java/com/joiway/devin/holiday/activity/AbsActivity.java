@@ -2,16 +2,22 @@ package com.joiway.devin.holiday.activity;
 
 import android.os.Build;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.joiway.devin.holiday.R;
+import com.joiway.devin.holiday.model.ConfigBean;
 import com.joiway.devin.holiday.tools.SharedPreferencesManager;
 import com.readystatesoftware.systembartint.SystemBarTintManager;
+
+import org.xutils.common.Callback;
+
+import jw.cn.com.jwutils.controller.activity.JWActivity;
+import jw.cn.com.jwutils.controller.net.NetManager;
+import jw.cn.com.jwutils.model.JWConfigBean;
+import jw.cn.com.jwutils.model.bean.NetOutputParameterBean;
 
 /**
  *所有activity 父类
@@ -22,7 +28,7 @@ import com.readystatesoftware.systembartint.SystemBarTintManager;
  * @docVersion 适用于代码规范v1.0.0版本
  * http://joiway.oicp.net:8090/pages/viewpage.action?pageId=5669071
  */
-public  class AbsActivity extends AppCompatActivity {
+public  class AbsActivity extends JWActivity {
     protected SharedPreferencesManager mSharedPreferencesManager;
 
 
@@ -48,4 +54,18 @@ public  class AbsActivity extends AppCompatActivity {
         rlTitleBar = (RelativeLayout) this.findViewById(R.id.rl_title);
         rlTitleBar.setLayoutParams(layoutParams);
     }
+    public <B extends NetOutputParameterBean> Callback.Cancelable doHttps(String url, Object params, NetManager.NetCallback<B> callback){
+
+        JWConfigBean jwConfigBean = JWConfigBean.getInstance(this.getApplication());
+        jwConfigBean.setHttpsClientAssetStr(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsClientKeystoreName());
+        jwConfigBean.setHttpsTrustKeystoreAssetStr(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsTrustKeystoreName());
+        jwConfigBean.setHttpsClientKeystoreRawId(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsClientKeystoreRawId());
+        jwConfigBean.setHttpsTrustKeystoreRawId(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsTrustKeystoreRawId());
+        jwConfigBean.setHttpsKeystorePwd(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsKeystorePwd());
+
+        return doHttps(jwConfigBean, url, params, callback);
+    }
+
+
+
 }
