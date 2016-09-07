@@ -58,4 +58,31 @@ public class BigDataMkBean  implements ISm{
     public void setUserid(String userid) {
         this.userid = userid;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        BigDataMkBean that = (BigDataMkBean) o;
+
+        if (sys_info != null ? !sys_info.equals(that.sys_info) : that.sys_info != null)
+            return false;
+        if (sys_info_sign != null ? !sys_info_sign.equals(that.sys_info_sign) : that.sys_info_sign != null)
+            return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
+        if (userid != null ? !userid.equals(that.userid) : that.userid != null) return false;
+        return sm != null ? sm.equals(that.sm) : that.sm == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = sys_info != null ? sys_info.hashCode() : 0;
+        result = 31 * result + (sys_info_sign != null ? sys_info_sign.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (userid != null ? userid.hashCode() : 0);
+        result = 31 * result + (sm != null ? sm.hashCode() : 0);
+        return result;
+    }
 }

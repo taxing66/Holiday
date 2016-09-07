@@ -48,7 +48,6 @@ public class MainActivity extends AbsActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toast.makeText(this, "hello ", Toast.LENGTH_SHORT).show();
         String test = "hello world";
         String test1 = "hello world";
 //        for (int i = 0; i < 1000; i++) {

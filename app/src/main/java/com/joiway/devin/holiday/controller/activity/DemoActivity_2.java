@@ -3,6 +3,7 @@ package com.joiway.devin.holiday.controller.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
 
 import com.joiway.devin.holiday.activity.DemoActivity_1;
@@ -24,6 +25,8 @@ public class DemoActivity_2 extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demo);
     }
+
+
 
     public void onButtonClick(View v) {
         if (v.getId() == R.id.button1) {
