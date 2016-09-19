@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dialog_margin">30dp</dimen>
+    <!-- 默认上下左右边距 -->
+    <dimen name="default_padding">12dp</dimen>
+    <dimen name="default_space_of_left">12dp</dimen>
+    <dimen name="default_space_of_right">12dp</dimen>
+    <dimen name="public_size_middle_text">15sp</dimen>
+    <dimen name="dialog_text_margin">20dp</dimen>
+    <dimen name="line_size_m">0.25dp</dimen>
+</resources>
