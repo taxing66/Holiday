@@ -115,7 +115,46 @@
    Covert - 变相; 隐蔽的; 隐藏的
    covert channel - 隐蔽信道; 隐信道; 隐密性通道
    covert ops - 谍报中心; 隐藏研究所; 秘密行动
+12 Occurrence
+   [ə'kʌr(ə)ns]  英[ə'kʌr(ə)ns]  美[ə'kʌrəns]
    
+   n. 发生；出现；事件；发现
+   
+   网络释义:
+   occurrence - 事件; 发生; 出现
+   loss occurrence - 损失发生; 损掉发生
+   random occurrence - 随机出现; 随机事件; 随机发生
+13 Caret
+   ['kærət]  英['kærət]  美['kærət]
+   
+   n. 脱字符号；插入符号
+   n. (Caret)人名；(法)卡雷；(英)卡雷特
+   
+   网络释义:
+   Caret - 脱字符; 插入符号; 插入记号
+   caret unit - 脱字单元; 插入号单位
+   Robert Caret - 卡瑞特
+14 Structurally
+   ['strʌktʃərəli]  英['strʌktʃərəli]  美['strʌktʃərəli]
+   
+   adv. 在结构上
+   
+   网络释义:
+   structurally - 在结构上; 结构; 结构上
+   Structurally Sound - 构造之声
+   structurally fixed - 结构固定; 结构固定模; 固定结构
+15 Highlight
+   ['haɪlaɪt]  英['haɪlaɪt]  美['haɪlaɪt]
+   
+   n. 最精彩的部分；最重要的事情；加亮区
+   vt. 突出；强调；使显著；加亮
+   
+   网络释义:
+   highlight - 强调; 重头戏; 高亮
+   highlight strength - 反光光强; 高光强度; 高光强度调整图像高光的强度
+   Highlight control - 高光控制; 亮度控制; 高光节制            
+         
+      
 Edit / 编辑
  undo typing / 撤消键入
   redo / 重新键入
@@ -128,7 +167,29 @@ Edit / 编辑
    paste simple / 贴简单
    delete / 删除
     find / 查找 
+    <Find/查找
+    replace/ 替换
+    find next  ,move to next occurrence/查找下一个，移动到下个事件
+     find previous , move to previous occurrence /查找上一个、移动到上个事件
+      find word at caret / 查找光标所在位置的单词
+      select all occurrences/  选择所有事件
+      add selection for next occurrence /新增下个事件的选择
+       unselect occurrence / 未选择事件
+       find in path.. / 查找路径
+       replace in path/  替换路径
+       replace structurally /  替换结构
+        find usages/ 查找有用到的话
+         find usages settings / 查找用过的设置 
+         show usages/ 显示用到的地方
+         find usages in file / 在文件查找用到的地方
+         highlight usages in file/  在文件在突出用过的地方
+          recent find usages/近期查找过的有用地方>
     macros/ 宏命令
+    <Play back last macro/ 执行最后的宏命令在后台
+    start macro recording / 开始宏命令记录
+    edit macros /  编辑宏命令
+    play saved macros 执行保存宏命令
+    >
      column selection mode/ 列选择模式 
      select all / 选择全部
       extend selection/ 扩展选择
@@ -141,6 +202,8 @@ Edit / 编辑
           unindent line or selection/不缩进行或者选择 
           toggle case / 触发实例
           covert indents/ 隐蔽的缩进
+          <to spaces /空间
+           to tabs标签>
           next parameter/ 下个参数
            previous parameter/上个参数
            encode xml /编码

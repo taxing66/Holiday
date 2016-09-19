@@ -202,6 +202,34 @@
    fork - 餐叉; 叉子; 复刻 (软件工程)
    fork bomb - Fork炸弹; Fork炸弹; 叉路炸弹
    Spanish Fork - 西班牙福克 (犹他州); 西班牙福克; 福克市
+20   mercurial
+   [mɜː'kjʊərɪəl]  英[mɜː'kjʊərɪəl]  美[mɝ'kjʊrɪəl]
+
+   adj. 水银的；水星的；墨丘利神的；雄辩机智的；活泼善变的
+   n. 汞剂；水银剂
+
+   网络释义:
+   Mercurial - 善变; 墨丘利; 幽鬼
+   mercurial barometer - 水银气压计; 水银气压表; 气压计
+   Mercurial ointments - 汞软膏
+21   subversion
+   [səb'vɜːʃən]  英[səb'vɜːʃən]  美[səb'vɝʒən]
+
+   n. 颠覆；破坏
+
+   网络释义:
+   Subversion - Apache Subversion; 아파치 서브버전; 颠覆
+   Rapacious Subversion - 颠覆掠夺; 贪婪颠覆
+   Subversion logic - 颠覆逻辑
+22   upload
+   [ʌp'ləʊd]  英[ʌp'ləʊd]  美[,ʌp'lod]
+
+   vt. 上传
+
+   网络释义:
+   Upload - 上传; 上装; 上载
+   Instant upload - 即时上传; 瞬时上传; 立即上传
+   Upload Video - 上传视频
 
 Vcs 版本控制系统
 Local history 本地历史记录
@@ -210,6 +238,12 @@ Show history  显示历史记录
 Show history for selection 显示选中项的历史记录
 Put label… 放置标签
 ）
+
+
+
+
+
+
 Vcs operations popup 版本控制系统动作弹窗
 Show changes view 展示更改过的视图
 Commit changes.. 提交更改过的文件
@@ -242,12 +276,33 @@ continue rebasing/ 继续复位基底
 skip commit in rebasing/ 路过提交在复位基底
 rebase my github fork / 复位基底我的github 分叉
 create pull request 创建更新要求
-
 >
 Create patch..  生成补丁
 Apply patch..  申请补丁
 Shelve changes.. 搁置改变
 Checkout from version control  检验从版本控制中
+<
+Github /
+cvs/
+git /
+google cloud/
+mercurial/ 水星
+subversion 颠覆
+>
 Import into version control 导入版本控制中
+<
+Import into cvs / 从版本控件器中导入
+create git repository/ 创建git仓库
+import into subversion/ 从颠覆中导入
+create mercurial repository/ 创建水星仓库
+Share project on github / 分享工程到gitHub
+upload project to google cloud… 上传工程到google cloud
+>
 Browse vcs repository  浏览版本控制器中的仓库
+<
+Browse cvs repository… 浏览CVS仓库
+Show git repository log.. 显示git仓库日志
+Browse subversion repository 浏览subversion仓库
+
+>
 Sync settings 同步设置

@@ -1,24 +1,35 @@
 apply plugin: 'com.android.application'
 
 android {
+//    signing
+    signingConfigs {
+        config {
+            keyAlias STORE_KEY_ALIAS
+            keyPassword STORE_KEY_PASSWORD
+            storeFile file(STORE_FILE)
+            storePassword STORE_PASSWORD
+        }
+    }
+    //properties
     compileSdkVersion 23
-    buildToolsVersion "24.0.0"
-
+    buildToolsVersion '24.0.0'
     defaultConfig {
         applicationId "com.joiway.devin.holiday"
         minSdkVersion 15
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        signingConfig signingConfigs.config
     }
     buildTypes {
-        debug{
+        debug {
             debuggable true
         }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    productFlavors {
     }
 }
 
@@ -31,5 +42,5 @@ dependencies {
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.android.support:recyclerview-v7:23.4.0'
     compile files('lib/crypto.jar')
-    compile project(":jwutils")
+    compile project(':jwutils')
 }
