@@ -1,1 +1,1 @@
-include ':app', ':jwutils'
+include ':app', ':jwutils', ':plugin'

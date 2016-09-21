@@ -1,0 +1,9 @@
+//添加 Groovy 插件和对应的两个依赖。
+//removed java plugin
+apply plugin: 'groovy'
+
+dependencies {
+    compile gradleApi()//gradle sdk
+    compile localGroovy()//groovy sdk
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+}

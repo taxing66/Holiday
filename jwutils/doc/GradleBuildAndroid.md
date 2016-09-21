@@ -1,0 +1,24 @@
+1\AVD
+利用gradle构建工具来自动构建你的Android项目。
+
+当你第一次打开Android studio的时候，有一个视图显示你即将创建的环境以及确保你使用了最新的Android SDK和必要的google依赖包，同时会让你选择是否创建AVD，这样你就可以使用模拟器了。
+利用模拟器开发，为虚拟机安装文件夹浏览器，是及时查看SQLite表文件利器，具体操作办法，可以google。
+尽量使用最新的23.0.0以上的构建版本。
+理解基本的Gradle
+如果你想创建一个Android project基于gradle,
+那么你必须写一个构建脚本，这个文件通常称之为build.grade,
+gradle会为我们提供很多默认的配置以及通常的默认值，如果你需要使用自己的配置，完全可以简单的去重写他们就好。
+
+Gradle脚本不是像传统的xml文件那样，而是一种基于Groovy的动态DSL，而Groovy语言是一种基于jvm的动态语言。
+
+你完全不用担心，你在使用gradle的时候，还需要去学习Groovy语言，该语言很容易阅读，并且如果你已经学习过java的话，学习Groovy将不会是难事，如果你想开始创建自己的tasks和插件，那么你最好对Groovy有一个较深的理解，然而由于其基于jvm,所以你完全可能通过纯正的java代码或者其他任何基于jvm的语言去开发你自己的插件，关于插件开发，我们后续将会有相关介绍。
+
+Project和tasks
+在grade中的两大重要的概念，分别是project和tasks。每一次构建都是有至少一个project来完成，所以Android studio中的project和Gradle中的project不是一个概念。每个project有至少一个tasks。每一个build.grade文件代表着一个project。tasks在build.gradle中定义。当初始化构建进程，gradle会基于build文件，集合所有的project和tasks,一个tasks包含了一系列动作，然后它们将会按照顺序执行，一个动作就是一段被执行的代码，很像Java中的方法。
+
+构建的生命周期
+一旦一个tasks被执行，那么它不会再次执行了，不包含依赖的Tasks总是优先执行，一次构建将会经历下列三个阶段：
+
+初始化阶段：project实例在这儿创建，如果有多个模块，即有多个build.gradle文件，多个project将会被创建。
+配置阶段：在该阶段，build.gradle脚本将会执行，为每个project创建和配置所有的tasks。
+执行阶段：这一阶段，gradle会决定哪一个tasks会被执行，哪一个tasks会被执行完全依赖开始构建时传入的参数和当前所在的文件夹位置有关。

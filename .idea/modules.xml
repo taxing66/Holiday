@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/Holiday.iml" filepath="$PROJECT_DIR$/Holiday.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/jwutils/jwutils.iml" filepath="$PROJECT_DIR$/jwutils/jwutils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />
     </modules>
   </component>
 </project>
