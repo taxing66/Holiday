@@ -65,11 +65,6 @@ public class DemoActivity_1 extends Activity {
             protected void onSuccess(Header header, DataJson<String, String> data, String msg) {
                 super.onSuccess(header, data, msg);
                 UpdateConfigIncomingBean  updateConfigIncomingBean = new UpdateConfigIncomingBean();
-                try {
-                    NetOutputParameterBean<UpdateConfigBackBean,Object> netOutputParameterBean = jw.cn.com.jwutils.controller.net.NetManager.httpPostSync("www.baidu.com",updateConfigIncomingBean,new TypeReference<NetOutputParameterBean<UpdateConfigIncomingBean,Object>>(){});
-                }catch (Throwable e){
-                    e.printStackTrace();
-                }
             }
 
             @Override

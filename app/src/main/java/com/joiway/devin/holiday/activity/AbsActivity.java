@@ -54,17 +54,6 @@ public  class AbsActivity extends JWActivity {
         rlTitleBar = (RelativeLayout) this.findViewById(R.id.rl_title);
         rlTitleBar.setLayoutParams(layoutParams);
     }
-    public <B extends NetOutputParameterBean> Callback.Cancelable doHttps(String url, Object params, NetManager.NetCallback<B> callback){
-
-        JWConfigBean jwConfigBean = JWConfigBean.getInstance(this.getApplication());
-        jwConfigBean.setHttpsClientAssetStr(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsClientKeystoreName());
-        jwConfigBean.setHttpsTrustKeystoreAssetStr(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsTrustKeystoreName());
-        jwConfigBean.setHttpsClientKeystoreRawId(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsClientKeystoreRawId());
-        jwConfigBean.setHttpsTrustKeystoreRawId(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsTrustKeystoreRawId());
-        jwConfigBean.setHttpsKeystorePwd(ConfigBean.getInstance(ConfigBean.MODE_CURRENT).getHttpsKeystorePwd());
-
-        return doHttps(jwConfigBean, url, params, callback);
-    }
 
 
 
