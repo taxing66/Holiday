@@ -25,5 +25,11 @@
         android:id="@+id/button3"
         android:onClick="onButtonClick"
         android:text="滑动冲突场景1-内部拦截" />
+    <Button
+        android:layout_width="wrap_content"
+        android:text="enter the listview"
+        android:onClick="onButtonClick"
+        android:id="@+id/btn_enter_list_view"
+        android:layout_height="wrap_content"/>
 
 </com.joiway.devin.holiday.view.RevealLayout>

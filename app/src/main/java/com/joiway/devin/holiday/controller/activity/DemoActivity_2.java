@@ -27,27 +27,40 @@ public class DemoActivity_2 extends Activity {
     }
 
 
-
     public void onButtonClick(View v) {
-        if (v.getId() == R.id.button1) {
-            GrandParents grandParents = new Son();
-            grandParents.grow(3);
-            Field[]  filds=   GlobalMethod.getAllField(Son.class);
-            for (int i = 0; i <filds.length; i++) {
-                try {
-                    LogManager.logDebug(LogManager.DEVELOPER_DEVIN,"DemoActivity_2","onButtonClick",filds[i].getName());
+        Intent intent;
+        switch (v.getId()) {
+            case R.id.button1:
+                GrandParents grandParents = new Son();
+                grandParents.grow(3);
+                Field[] filds = GlobalMethod.getAllField(Son.class);
+                for (int i = 0; i < filds.length; i++) {
+                    try {
+                        LogManager.logDebug(LogManager.DEVELOPER_DEVIN, "DemoActivity_2", "onButtonClick", filds[i].getName());
 
-                }catch (Exception e){
-                    e.printStackTrace();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
                 }
 
-            }
-        } else if (v.getId() == R.id.button2) {
-            Intent intent = new Intent(this, XUtilsActivity.class);
-            startActivity(intent);
-        } else if (v.getId() == R.id.button3) {
-            Intent intent = new Intent(this, DemoActivity_2.class);
-            startActivity(intent);
+                break;
+            case R.id.button2:
+
+                intent = new Intent(this, XUtilsActivity.class);
+                startActivity(intent);
+
+                break;
+            case R.id.button3:
+
+                intent = new Intent(this, DemoActivity_2.class);
+                startActivity(intent);
+
+                break;
+            case R.id.btn_enter_list_view:
+                intent = new Intent(this,ListViewActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 }
