@@ -19,15 +19,15 @@ import java.util.List;
 import jw.cn.com.jwutils.controller.utils.LogUtils;
 
 /**
- * 相当于控制器，拿到数据和拿到界面，控制器把数据显示到界面中去
+ * 有删除和复制功能的holder
  */
 
-public class ListViewsHolder<T> extends AbsHolder<ListItemStringBean> {
+public class ListViewProHolder<T> extends AbsHolder<ListItemStringBean> {
     /**
      * 该holder所能显示的视图
      */
-    public static final int PUBLIC_INT_RESOURCE_ID = R.layout.view_list_view_item_single;
-    public ListViewsHolder(Context context, List<T> listData, ListViewAdapter<T> tListViewAdapter){
+    public static final int PUBLIC_INT_RESOURCE_ID = R.layout.view_list_view_item_second;
+    public ListViewProHolder(Context context, List<T> listData, ListViewAdapter<T> tListViewAdapter){
         this.mContext = context;
         this.mListData = listData;
         this.mListViewAdapter = tListViewAdapter;
@@ -48,11 +48,17 @@ public class ListViewsHolder<T> extends AbsHolder<ListItemStringBean> {
         LogUtils.logDebug(LogUtils.DEVELOPER_DEVIN,"ListViewActivity","setData", JSON.toJSONString(listItemStringBean));
     }
 
-    @Event(value = {R.id.tv_content})
+    @Event(value = {R.id.tv_content,R.id.btn_delete})
     private void clickBtn(View v) {
         switch (v.getId()) {
             case R.id.tv_content:
                 ToastManager.showToastShort(mContext, "hello" + mPosition);
+                break;
+            case R.id.btn_delete:
+                if (mListData.remove(mListItemStringBean)){
+                    mListViewAdapter.notifyDataSetChanged();
+                    ToastManager.showToastShort(mContext, "delete success");
+                }
                 break;
         }
     }
@@ -60,10 +66,7 @@ public class ListViewsHolder<T> extends AbsHolder<ListItemStringBean> {
     private  boolean clickBtnLong(View v){
         switch (v.getId()){
             case R.id.tv_content:
-              if (mListData.remove(mListItemStringBean)){
-                  mListViewAdapter.notifyDataSetChanged();
-                  ToastManager.showToastShort(mContext, "delete success");
-              }
+
 
                 break;
         }
