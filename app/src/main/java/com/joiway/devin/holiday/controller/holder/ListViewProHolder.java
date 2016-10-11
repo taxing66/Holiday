@@ -32,6 +32,7 @@ public class ListViewProHolder<T> extends AbsHolder<ListItemStringBean> {
         this.mListData = listData;
         this.mListViewAdapter = tListViewAdapter;
     }
+
     private List<T> mListData;
     private ListViewAdapter<T> mListViewAdapter;
     private Context mContext;
@@ -46,6 +47,11 @@ public class ListViewProHolder<T> extends AbsHolder<ListItemStringBean> {
         this.mListItemStringBean = listItemStringBean;
         this.mPosition = position;
         LogUtils.logDebug(LogUtils.DEVELOPER_DEVIN,"ListViewActivity","setData", JSON.toJSONString(listItemStringBean));
+    }
+
+    @Override
+    public int getResourceId(int holderTag) {
+        return PUBLIC_INT_RESOURCE_ID;
     }
 
     @Event(value = {R.id.tv_content,R.id.btn_delete})

@@ -48,6 +48,11 @@ public class ListViewsHolder<T> extends AbsHolder<ListItemStringBean> {
         LogUtils.logDebug(LogUtils.DEVELOPER_DEVIN,"ListViewActivity","setData", JSON.toJSONString(listItemStringBean));
     }
 
+    @Override
+    public int getResourceId(int holderTag) {
+        return PUBLIC_INT_RESOURCE_ID;
+    }
+
     @Event(value = {R.id.tv_content})
     private void clickBtn(View v) {
         switch (v.getId()) {
